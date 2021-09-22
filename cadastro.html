@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    
+    <h1>Crie uma conta no Tomato π</h1>
+
+   <div id = "div_pri">
+        Nome: <input id = "ipt_nome">
+        Sobrenome: <input id = "ipt_sobre"><br><br>
+
+        E-mail: <input>
+        Senha: <input id = "ipt_senha" type = "password"><br><br>
+
+        Usuário: <input id = "ipt_user">
+        
+   </div><br>
+
+   <br>
+
+    <button onclick="cadastrar()">Cadastrar</button><br>
+
+    <div id="div_sec"></div>
+
+
+</body>
+</html>
+
+<script>
+
+    function cadastrar() {
+
+        var nome = String(ipt_nome.value) + ' ' + String(ipt_sobre.value);
+
+        if (String(ipt_user.value) == 'tomatopi' && ipt_senha.value == 'tomato123') {
+            div_sec.innerHTML = `Olá ${nome}!`;
+        }else {
+            alert("Cadastro inválido");
+        }
+
+    }
+
+</script>
