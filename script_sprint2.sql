@@ -1,8 +1,7 @@
 -- Criando Banco de Dados --
-create database cultivo_tomato;
-
+create database sprint2;
 -- Selecionando Banco de Dados --
-use tomato;
+use sprint2;
 
 -- Criando Tabela Cadastro T1 --
 create table cadastro (
