@@ -1,0 +1,97 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#fundo {
+    background-color: #f5f4f2;
+}
+.header {
+    height: 100px;
+    background-color: black;
+}
+.container{
+    width: 80%;
+    height: 100%;
+    margin: auto;   
+}
+.header .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar{
+    display: flex;
+    width: 35%;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-between;
+}
+.navbar li {
+    font-weight: lighter;
+    color: white;
+    font-size: 14px;
+}
+.navbar li a{
+ text-decoration: none;
+ color: white;
+}
+.navbar .active{
+    font-weight: bolder;
+    color: #b01105;
+}
+#login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#conteudo{
+    justify-content: center;
+    align-items: center;
+    margin-top: 75px;
+    margin-bottom: 100px;
+    padding: 50px;
+    padding-top: 40px;
+    background-color: white;
+    border-radius: 20px;
+    border: solid black 4px;
+    box-shadow: 5px 5px 0.03px black;
+}
+.ipt{
+    height: 22px;
+    width: 260px;
+    border-radius: 10px;
+    padding: 3px;
+    margin: 3px;
+}
+.btn{
+    height: 40px;
+    width: 110px;
+    background-color: #a61107;
+    color: whitesmoke;
+    font-size: 17px;
+    border-radius: 10px;
+}
+.btn2{
+    height: 40px;
+    width: 110px;
+    background-color: black;
+    color: whitesmoke;
+    font-size: 17px;
+    border-radius: 10px;
+}
+#botao{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#rodape{
+    background-color: black;
+    color: #c9c9c9;
+    display: flex;
+    padding-top: 15px;
+    flex-direction: column;
+    align-items: center;
+    height: 85px;
+}
