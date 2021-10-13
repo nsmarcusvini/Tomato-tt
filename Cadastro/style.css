@@ -72,15 +72,17 @@
     color: whitesmoke;
     font-size: 17px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
 }
-.btn2{
+/* .btn2{
     height: 40px;
     width: 110px;
     background-color: black;
     color: whitesmoke;
     font-size: 17px;
     border-radius: 10px;
-}
+} */
 #botao{
     display: flex;
     flex-direction: row;

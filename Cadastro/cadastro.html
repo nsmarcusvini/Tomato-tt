@@ -29,7 +29,7 @@
             Nome:<br>
             <input id = "ipt_nome" placeholder="Insira o nome da empresa" class="ipt"><br><br>
             CNPJ:<br>
-            <input id = "ipt_sobre" placeholder="Insira o CNPJ" class="ipt"><br><br>
+            <input id = "ipt_cnpj" placeholder="Insira o CNPJ" class="ipt"><br><br>
             E-mail:<br>
             <input placeholder="Insira seu e-mail" class="ipt"><br><br>
             Usuário:<br>
@@ -39,10 +39,11 @@
             
             <div id="botao">
                 <button onclick="cadastrar()" class="btn">Cadastrar</button><br><br>
-                <button class="btn2">Login</button>
             </div>
         </div>
     </div>
+
+    <div id="div_sec"></div>
 
     <div id="rodape">
         Site desenvolvido por um aluno Bandtec Digital School - 2021
@@ -54,10 +55,10 @@
 
     function cadastrar() {
 
-        var nome = String(ipt_nome.value) + ' ' + String(ipt_sobre.value);
+        var nome = String(ipt_nome.value);
 
         if (String(ipt_user.value) == 'tomatopi' && ipt_senha.value == 'tomato123') {
-            div_sec.innerHTML = `Olá ${nome}!`;
+            alert(`Cadastro realizado com sucesso. Seja bem-vindo(a) ${nome}!`);
         }else {
             alert("Cadastro inválido");
         }
