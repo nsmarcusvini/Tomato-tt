@@ -1,0 +1,213 @@
+
+<!doctype html>
+<html>
+
+<head>
+	<title>Gráficos</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Sensor DHT11 - Umidade</h1>
+			<section>
+				<h2>Média: <label id='average'>0.00</label></h2>
+			</section>
+			<section style="width:100%">
+				<canvas id="chart"></canvas>
+		<section>
+	</div>
+	<div>
+		<h1>Sensor DHT11 - Temperatura</h1>
+			<section>
+				<h2>Média: <label id='average2'>0.00</label></h2>
+			</section>
+			<section style="width:100%">
+				<canvas id="chart2"></canvas>
+		<section>
+	</div>
+	<script>
+
+        var umidade = [];
+        var temperatura = [];
+        var media_temp = 0;
+        var media_umi = 0;
+        var cont = 0;
+
+var context = document.getElementById("chart").getContext("2d");
+    context.canvas.width = 1000;
+    context.canvas.height = 300;
+
+    var configuration = {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: "Umidade (%)",
+                type: 'line',
+                borderColor: ['#34baeb'],
+                backgroundColor: ['#34baeb00']
+            
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    distribution: 'series',
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Umidade (%)'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            animation: {
+                duration: 0
+            }
+        }
+    };
+
+    var chart = new Chart(context, configuration);
+    this.lastIndexTemp = 0;
+    this.time = 0;
+
+    function get_data() {
+
+        var http = new XMLHttpRequest();
+        http.open('GET', 'http://localhost:3000/api', false);
+        http.send(null);
+
+        var obj = JSON.parse(http.responseText);
+        if (obj.data.length == 0) {
+            return;
+        }
+
+        
+
+        var _lastIndexTemp = this.lastIndexTemp;
+        this.lastIndexTemp = obj.data.length;
+        listTemp = obj.data.slice(_lastIndexTemp);
+
+        listTemp.forEach(data => {
+            if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10) {
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+            }
+
+            chart.data.labels.push(this.time++);
+            chart.data.datasets[0].data.push(parseFloat(data[0]));
+            chart.update();
+        });
+
+        
+
+        
+        listTemp.forEach(data => {
+            if (chart2.data.labels.length == 10 && chart2.data.datasets[0].data.length == 10) {
+                chart2.data.labels.shift();
+                chart2.data.datasets[0].data.shift();
+            }
+
+            chart2.data.labels.push(this.time++);
+            chart2.data.datasets[0].data.push(parseFloat(data[1]));
+            chart2.update();
+            
+        })
+        
+        listTemp.forEach(data => {
+            
+
+            cont +=2;
+
+            for (let i = 0; i<= 1;i++){
+                temperatura.push(parseFloat(data[1]));
+                umidade.push(parseFloat(data[0]));
+            }
+            let sum_umi = umidade.reduce((a, b)=> a + b); 
+            let sum_temp = temperatura.reduce((a, b)=> a + b); 
+        
+            
+            
+            media_temp = sum_temp / cont;
+            media_umi = sum_umi / cont; 
+            document.getElementById('average2').textContent = media_temp.toFixed(0);
+            document.getElementById('average').textContent = media_umi.toFixed(0);
+
+             if (media_umi > 69) {
+                alert('Nível de umidade: Crítico');
+             }
+            if (media_temp > 27){
+                alert('Nível de temperatura: Crítico');
+            }
+        })
+        
+        ;
+
+   
+    }
+
+    setInterval(() => {
+        get_data();
+    }, 1000);
+
+
+    var context2 = document.getElementById("chart2").getContext("2d");
+    context2.canvas.width = 1000;
+    context2.canvas.height = 300;
+
+    var configuration2 = {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: "Temperatura (°C)",
+                type: 'line',
+                borderColor: ['#eb3a34'],
+                backgroundColor: ['#eb3a3400']
+               }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    distribution: 'series',
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Temperatura (°C)'
+                    },
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            animation: {
+                duration: 0
+            }
+        }
+    };
+
+    var chart2 = new Chart(context2, configuration2);
+
+    
+</script>
+</body>
+
+</html>
