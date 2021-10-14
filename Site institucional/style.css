@@ -27,20 +27,38 @@
     list-style: none;
     justify-content: space-between;
 }
-.navbar li {
+.navbar li{
     font-weight: lighter;
     color: white;
     font-size: 14px;
-}
-.navbar li a{
- text-decoration: none;
- color: white;
 }
 .navbar .active{
     font-weight: bolder;
     color: #b01105;
 }
+.navbar li a{
+ text-decoration: none;
+ color: white;
+}
+.banner{
+    height: 700px;
+    background-image: url(banner2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.banner #cadastro {
+    margin-top: 100px;
+}
 #login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#cadastro{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,7 +67,6 @@
 #conteudo{
     justify-content: center;
     align-items: center;
-    margin-top: 75px;
     margin-bottom: 100px;
     padding: 50px;
     padding-top: 40px;
@@ -72,6 +89,9 @@
     color: whitesmoke;
     font-size: 17px;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .btn2{
     height: 40px;
@@ -85,15 +105,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-}
-#rodape{
-    background-color: black;
-    color: #c9c9c9;
-    display: flex;
-    padding-top: 15px;
-    flex-direction: column;
-    align-items: center;
-    height: 85px;
 }
 #proposito{
     padding: 50px;
@@ -111,4 +122,13 @@
     margin-bottom: 100px;
     display: flex;
     justify-content: center;
+}
+#footer{
+    background-color: black;
+    color: #c9c9c9;
+    display: flex;
+    padding-top: 15px;
+    flex-direction: column;
+    align-items: center;
+    height: 85px;
 }
