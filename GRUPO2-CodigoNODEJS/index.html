@@ -145,6 +145,7 @@ var context = document.getElementById("chart").getContext("2d");
             
             media_temp = sum_temp / cont;
             media_umi = sum_umi / cont; 
+<<<<<<< HEAD
             document.getElementById('average2').textContent = media_temp.toFixed(1);
             document.getElementById('average').textContent = media_umi.toFixed(1);
 
@@ -183,6 +184,16 @@ var context = document.getElementById("chart").getContext("2d");
             }
             else if (media_temp == 28){
                 alert('Nível de temperatura: Crítico max');
+=======
+            document.getElementById('average2').textContent = media_temp.toFixed(0);
+            document.getElementById('average').textContent = media_umi.toFixed(0);
+
+             if (media_umi > 69) {
+                alert('Nível de umidade: Crítico');
+             }
+            if (media_temp > 27){
+                alert('Nível de temperatura: Crítico');
+>>>>>>> 26460716264763bd267bef0ea4c621a4be186505
             }
         })
         
