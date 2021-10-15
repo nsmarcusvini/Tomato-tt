@@ -14,27 +14,46 @@
 			-ms-user-select: none;
 		}
 	</style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-	<div>
-		<h1>Sensor DHT11 - Umidade</h1>
+    <div class="header">
+        <div class="container">
+            <h1 id="logotipo"> <img src="logo final branco.png" style="height: 70px;"></h1>
+            <ul class="navbar">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="simulador financeiro.html">Simulador</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li class="active"><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+<div id="conteudo">
+	<div>   
 			<section>
-				<h2>Média: <label id='average'>0.00</label></h2>
+				<h3>Umidade média do ambiente: <label id='average'>0.00</label></h3>
 			</section>
 			<section style="width:100%">
 				<canvas id="chart"></canvas>
 		<section>
 	</div>
 	<div>
-		<h1>Sensor DHT11 - Temperatura</h1>
 			<section>
-				<h2>Média: <label id='average2'>0.00</label></h2>
+				<h3>Temperatura média do ambiente: <label id='average2'>0.00</label></h3>
 			</section>
 			<section style="width:100%">
 				<canvas id="chart2"></canvas>
 		<section>
 	</div>
+</div>
+</div>
+
+
+
 	<script>
 
         var umidade = [];
@@ -145,7 +164,6 @@ var context = document.getElementById("chart").getContext("2d");
             
             media_temp = sum_temp / cont;
             media_umi = sum_umi / cont; 
-<<<<<<< HEAD
             document.getElementById('average2').textContent = media_temp.toFixed(1);
             document.getElementById('average').textContent = media_umi.toFixed(1);
 
@@ -184,16 +202,6 @@ var context = document.getElementById("chart").getContext("2d");
             }
             else if (media_temp == 28){
                 alert('Nível de temperatura: Crítico max');
-=======
-            document.getElementById('average2').textContent = media_temp.toFixed(0);
-            document.getElementById('average').textContent = media_umi.toFixed(0);
-
-             if (media_umi > 69) {
-                alert('Nível de umidade: Crítico');
-             }
-            if (media_temp > 27){
-                alert('Nível de temperatura: Crítico');
->>>>>>> 26460716264763bd267bef0ea4c621a4be186505
             }
         })
         
