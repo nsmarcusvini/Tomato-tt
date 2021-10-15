@@ -33,7 +33,7 @@
                 CNPJ:<br>
                 <input id = "ipt_cnpj" placeholder="Insira o CNPJ" class="ipt"><br><br>
                 E-mail:<br>
-                <input placeholder="Insira seu e-mail" class="ipt"><br><br>
+                <input id = "ipt_email" placeholder="Insira seu e-mail" class="ipt"><br><br>
                 Usuário:<br>
                 <input id = "ipt_user" placeholder="Escolha o nome de usuário" class="ipt"><br><br>
                 Senha:<br>
@@ -57,13 +57,20 @@
     function cadastrar() {
 
         var nome = String(ipt_nome.value);
+        var cnpj = String(ipt_cnpj.value);
+        var email = String(ipt_email.value);
+        var user = String(ipt_user.value);
+        var senha = String(ipt_senha.value);
 
-        if (String(ipt_user.value) == 'tomatopi' && ipt_senha.value == 'tomato123') {
-            alert(`Cadastro realizado com sucesso. Seja bem-vindo(a) ${nome}!`);
-        }else {
-            alert("Cadastro inválido");
+        if(nome == '' || cnpj == '' || email == '' || user == '' || senha == ''){
+            alert("Preencha todos os campos");
+        }else{
+            if (user == 'tomatopi' && senha == 'tomato123') {
+                alert(`Cadastro realizado com sucesso. Seja bem-vindo(a) ${nome}!`);
+            }else{
+                alert("Cadastro inválido");
+            }
         }
-
     }
 
 </script>
