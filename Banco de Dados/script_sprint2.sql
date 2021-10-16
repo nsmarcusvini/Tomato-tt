@@ -1,6 +1,6 @@
 -- Criando Banco de Dados Sprint2 --
 create database sprint2;
-
+drop database sprint2;
 -- Selecionando Banco de Dados cultivo_tomato --
 use sprint2;
 
@@ -22,7 +22,7 @@ usuario varchar (40),
 senha char (10),
 fkCadastro int,
 foreign key (fkCadastro) references cadastro (idCliente)
-) auto_increment = 100;
+);
 
 -- Inserindo dados na tabela cadastro --
 insert into cadastro(nomeEmpresa,CNPJ,email,contatoEmpresa) values
@@ -121,10 +121,13 @@ select * from usuario;
 select * from fazenda;
 select * from sensor;
 select * from dadoshistoricos;
+select * from acesso;
 
--- Exibir todos os campos e todos os dados da tabela usuario, cadastro e fazenda --
-select * from usuario join cadastro on usuario.idUsuario = 
-					  join fazenda on fazenda.fkCadastro = fazenda.idFazenda;
+-- Exibir todos os campos e todos os dados da tabela usuario, cadastro --
+select * from usuario join cadastro on idCliente = fkCadastro;
+
+select * from usuario join cadastro on cadastro.idCliente = usuario.fkCadastro
+	join fazenda on fazenda.fkCadastro = idCliente;
                       
 -- Exibindo os principais dados de um determinado cliente --                      
 select usuario.nomeUsuario as 'Nome do Usuário',
