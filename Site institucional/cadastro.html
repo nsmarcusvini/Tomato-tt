@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>TomatoPi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="fundo">
@@ -54,7 +54,7 @@
                 Nome:<br>
                 <input id="ipt_nome" class="ipt" placeholder="Insira seu nome completo"><br><br>
                 Cidade:<br>
-                <input id="" class="ipt" placeholder="Insira sua cidade"><br><br>
+                <input id="ipt_cidade" class="ipt" placeholder="Insira sua cidade"><br><br>
 
                 <div id="botao">
                     <button onclick="completar()" class="btn2">Finalizar</button>
@@ -83,7 +83,7 @@
              alert("Preencha todos os campos");
          }else{
              if (user == 'tomatopi' && senha == 'tomato123') {
-                 alert(`Cadastro realizado com sucesso. Seja bem-vindo(a) ${empresa}!`);
+                 alert(`Cadastro realizado com sucesso. Seja bem-vindo(a)!`);
                 cadastro2.style.display = 'block';
              }else{
                  alert("Cadastro inválido");
@@ -99,7 +99,7 @@
         if(contato == '' || nome == '' || cidade == ''){
             alert("Complete seu cadastro");
         } else {
-            alert("Obrigado(a) por se juntar a TomatoPi!")
+            alert(`Obrigado(a) ${nome}, por se juntar a TomatoPi!`)
         }
     }
 
