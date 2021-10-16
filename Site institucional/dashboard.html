@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body id="fundo">
     <div class="header">
         <div class="container">
             <h1 id="logotipo"> <img src="logo final branco.png" style="height: 70px;"></h1>
@@ -30,29 +30,38 @@
             </ul>
         </div>
     </div>
+    
+        <div id="user" class="container">
+            <h1>Controle de temperatura e umidade</h1><br>
+            <h4>Empresa:</h4><br><br>
+            <h4>Fazenda:</h4><br><br>
+            <h4>Usuário:</h4>
+        </div>
+    
+        <div class="container" id="conteudo">
+        <div>   
+                <section>
+                    <h3>Umidade média do ambiente: <label id='average'>0.00</label></h3>
+                </section>
+                <section style="width:100%">
+                    <canvas id="chart"></canvas>
+            <section>
+        </div>
+        <div>
+                <section>
+                    <h3>Temperatura média do ambiente: <label id='average2'>0.00</label></h3>
+                </section>
+                <section style="width:100%">
+                    <canvas id="chart2"></canvas>
+            <section>
+        </div>
+    </div>
+    
 
-    <div class="container">
-<div id="conteudo">
-	<div>   
-			<section>
-				<h3>Umidade média do ambiente: <label id='average'>0.00</label></h3>
-			</section>
-			<section style="width:100%">
-				<canvas id="chart"></canvas>
-		<section>
-	</div>
-	<div>
-			<section>
-				<h3>Temperatura média do ambiente: <label id='average2'>0.00</label></h3>
-			</section>
-			<section style="width:100%">
-				<canvas id="chart2"></canvas>
-		<section>
-	</div>
+
+<div id="footer">
+    Site desenvolvido por alunos Bandtec Digital School © 2021
 </div>
-</div>
-
-
 
 	<script>
 
