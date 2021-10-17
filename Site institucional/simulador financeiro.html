@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TomatoPi</title>
+    <title>Tomato π</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -25,10 +25,10 @@
     </div>
 
 
-    
+
     <div class="container" id="user">
         <h1>Simulador Financeiro</h1><br>
-        
+
         <b>Quantidade de hectares:</b><br>
         <input id="Hectare" type="text" placeholder="Exemplo: 15000"><br><br>
 
@@ -36,9 +36,9 @@
         <input id="PT" type="text" placeholder="Exemplo: 450000"><br><br>
 
         <button id="Prod" onclick="Perda()" class="btn2_simulador">Calcular produção</button><br>
-        
-        <button id="TPI" style="display: none;" onclick="Tomato()" class="btn2_simulador">Calcular com <img src="logo final branco.png"
-                style="height: 30px"></button><br>
+
+        <button id="TPI" style="display: none;" onclick="Tomato()" class="btn2_simulador">Calcular com <img
+                src="logo final branco.png" style="height: 30px"></button><br>
 
     </div>
 
@@ -68,7 +68,7 @@
 <script>
     function Perda() {
 
-        if(Hectare.value != "" || PT.value != ""){
+        if (Hectare.value != "" || PT.value != "") {
             var h = Number(Hectare.value)
             var pt = Number(PT.value)
             var ph = pt / h
@@ -92,7 +92,7 @@
 
             TPI.style.display = 'Block'
             Prod.style.display = 'None'
-        }else{
+        } else {
             alert("Informe as informações necessárias")
         }
     }
