@@ -4,13 +4,14 @@ create database sprint2;
 -- Selecionando Banco de Dados cultivo_tomato --
 use sprint2;
 
--- Criando Tabela Cadastro, com os campos: idCliente, nome, cnpj, email e contato --
+-- Criando Tabela Cadastro, com os campos: idCliente, nome, cnpj, email, telefone comercial e celular --
 create table cadastro (
 idCliente int primary key auto_increment,
 nomeEmpresa varchar (45),
 CNPJ char (18),
-email varchar (45),
-contatoEmpresa varchar (45)
+emailEmpresa varchar (45),
+telComercial varchar (45),
+telCelular varchar (45)
 );
 
 -- Criando Tabela Usuários, com os campos: idUsuario, nome, cidade, usuário, senha e fkCadastro --
@@ -22,16 +23,16 @@ usuario varchar (40),
 senha char (10),
 fkCadastro int,
 foreign key (fkCadastro) references cadastro (idCliente)
-) auto_increment = 100;
+);
 
 -- Inserindo dados na tabela cadastro --
-insert into cadastro(nomeEmpresa,CNPJ,email,contatoEmpresa) values
-('Benedita e Bernardo Alimentos ME','08.700.284/0001-30','producao@beneditaebernardoalimentosme.com.br','(11) 3550-1448'),
-('Nelson e Vicente Alimentos ME','00.128.259/0001-12','orcamento@nelsonevicentealimentosme.com.br','(19) 2724-3293'),
-('Fazendas Brandão','09.432.725/0001-23','administracao@vanessaecarlaadegame.com.br','(11) 2881-4840'),
-('MARFRIG GLOBAL FOODS','24.024.735/0001-13','marfrig@foodstomate.com.br','(19) 3552-3206'),
-('BUNGE ALIMENTOS','39.299.885/0001-07','bunge@alimentos.com.br','(19) 2839-6786'),	
-('Fazenda do Cultivo','81.518.290/0001-61','fazenda.cultivo@bandtec.com.br','(11) 3767-5067');
+insert into cadastro(nomeEmpresa,CNPJ,emailEmpresa,telComercial,telCelular) values
+('Benedita e Bernardo Alimentos ME','08.700.284/0001-30','producao@beneditaebernardoalimentosme.com.br','(11) 3550-1448','(11) 98765-5432'),
+('Nelson e Vicente Alimentos ME','00.128.259/0001-12','orcamento@nelsonevicentealimentosme.com.br','(19) 2724-3293','(11) 98765-1111'),
+('Fazendas Brandão','09.432.725/0001-23','administracao@vanessaecarlaadegame.com.br','(11) 2881-4840','(11) 98765-2222'),
+('MARFRIG GLOBAL FOODS','24.024.735/0001-13','marfrig@foodstomate.com.br','(19) 3552-3206','(11) 98765-5555'),
+('BUNGE ALIMENTOS','39.299.885/0001-07','bunge@alimentos.com.br','(19) 2839-6786','(11) 98765-5454'),	
+('Fazenda do Cultivo','81.518.290/0001-61','fazenda.cultivo@bandtec.com.br','(11) 3767-5067','(11) 98765-0000');
 
 -- Inserindo dados na tabela usuário --
 insert into usuario (nomeUsuario,cidade,usuario,senha,fkCadastro) values
@@ -121,10 +122,13 @@ select * from usuario;
 select * from fazenda;
 select * from sensor;
 select * from dadoshistoricos;
+select * from acesso;
 
--- Exibir todos os campos e todos os dados da tabela usuario, cadastro e fazenda --
-select * from usuario join cadastro on usuario.idUsuario = 
-					  join fazenda on fazenda.fkCadastro = fazenda.idFazenda;
+-- Exibir todos os campos e todos os dados da tabela usuario, cadastro --
+select * from usuario join cadastro on idCliente = fkCadastro;
+
+select * from usuario join cadastro on cadastro.idCliente = usuario.fkCadastro
+	join fazenda on fazenda.fkCadastro = idCliente;
                       
 -- Exibindo os principais dados de um determinado cliente --                      
 select usuario.nomeUsuario as 'Nome do Usuário',
@@ -139,7 +143,7 @@ select usuario.nomeUsuario as 'Nome do Usuário',
                      join fazenda on cadastro.idCliente = fazenda.fkCadastro
                      join dadoshistoricos on fazenda.idFazenda = dadoshistoricos.fkFazenda
                      join sensor on fazenda.idFazenda =  sensor.fkFazenda
-                     where usuario.idUsuario = 100;
+                     where usuario.idUsuario = 3;
                      
 -- Exibindo                                  
 select usuario.nomeUsuario as 'Usuário',
@@ -153,4 +157,4 @@ select usuario.nomeUsuario as 'Usuário',
 			  join fazenda on cadastro.idCliente = fazenda.fkCadastro
               join dadoshistoricos on fazenda.idFazenda = dadoshistoricos.fkFazenda
               join sensor on fazenda.idFazenda =  sensor.fkFazenda
-              where usuario.idUsuario = 101;
+              where usuario.idUsuario = 1;
