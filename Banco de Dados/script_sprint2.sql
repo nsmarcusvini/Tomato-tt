@@ -1,6 +1,6 @@
 -- Criando Banco de Dados Sprint2 --
 create database sprint2;
-
+drop database sprint2;
 -- Selecionando Banco de Dados cultivo_tomato --
 use sprint2;
 

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Financeiro</title>
+    <title>Tomato π</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body id="fundo">
 
     <div class="header">
         <div class="container">
@@ -19,36 +19,45 @@
                 <li class="active"><a href="simulador financeiro.html">Simulador</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a> </li>
+                <li><a href="dashboard.html">Dashboard</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="container">
+
+
+    <div class="container" id="user">
         <h1>Simulador Financeiro</h1><br>
 
-    </div>
-
-    <div class="container">
         <b>Quantidade de hectares:</b><br>
         <input id="Hectare" type="text" placeholder="Exemplo: 15000"><br><br>
 
         <b>Produção total:</b><br>
         <input id="PT" type="text" placeholder="Exemplo: 450000"><br><br>
 
-        <button id="Prod" onclick="Perda()">Calcular produção</button><br>
-        
-        <button id="TPI" style="display: none;" onclick="Tomato()">Calcular com <img src="logo final.png"
-                style="height: 30px"></button><br>
+        <button id="Prod" onclick="Perda()" class="btn2_simulador">Calcular produção</button><br>
 
-        <div id="Perdas"></div> <br><br>
-        <div id="TomatoPI" style="display: none;"></div>
+        <button id="TPI" style="display: none;" onclick="Tomato()" class="btn2_simulador">Calcular com <img
+                src="logo final branco.png" style="height: 30px"></button><br>
 
     </div>
 
 
+    <div class="container">
+
+        <div id="conteudo" style="display: none; margin-bottom: 40px;">
+            <div id="Perdas"></div> <br>
+        </div>
+
+        <div id="conteudo2" style="display: none;">
+            <div id="TomatoPI"></div>
+
+        </div>
+
+    </div>
 
     <div id="footer">
-        Site desenvolvido por um aluno Bandtec Digital School - 2021
+        Site desenvolvido por alunos Bandtec Digital School © 2021
     </div>
 
 
@@ -59,7 +68,7 @@
 <script>
     function Perda() {
 
-        if(Hectare.value != "" || PT.value != ""){
+        if (Hectare.value != "" || PT.value != "") {
             var h = Number(Hectare.value)
             var pt = Number(PT.value)
             var ph = pt / h
@@ -69,6 +78,8 @@
             var bg = (pto * 100) / ph
             var bb = 100
             var barraR = (pd * 100) / ph
+
+            conteudo.style.display = 'block';
 
             Perdas.innerHTML = `<h2>Produção atual</h2><br>
             Estimativa de produção por hectare: ${pte.toFixed(2)}kg/ha <br>
@@ -81,7 +92,7 @@
 
             TPI.style.display = 'Block'
             Prod.style.display = 'None'
-        }else{
+        } else {
             alert("Informe as informações necessárias")
         }
     }
@@ -96,8 +107,9 @@
         var bb = 100
         var barraR = (pd * 100) / ph
 
-        Perdas.style.display = 'block'
-        TomatoPI.style.display = 'block'
+        conteudo2.style.display = 'block';
+        Perdas.style.display = 'block';
+        TomatoPI.style.display = 'block';
         TomatoPI.innerHTML = `<h2>Produção com <img src = "logo final.png" style="height: 40px;"></h2><br>
         Estimativa de produção por hectare: ${pte.toFixed(2)}kg/ha <br>
         <div style="background-color: green; height: 30px; width: ${bb}%;"></div><br><br>

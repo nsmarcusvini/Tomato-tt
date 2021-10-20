@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Tomato π</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,33 +19,33 @@
                 <li><a href="simulador financeiro.html">Simulador</a></li>
                 <li><a href="cadastro.html">Cadastro</a> </li>
                 <li class="active"><a href="login.html">Login</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
             </ul>
         </div>
     </div>
 
     <div class="banner">
-        
-            <div id="login">
-                <div id="conteudo">
-                    <h1>Acesse sua conta</h1><br>
-        
-                    Login:<br>
-                    <input id="usuario" class="ipt" type="text" placeholder="Insira seu nome se usuário"><br><br>
-                    Senha:<br>
-                    <input id="senha" class="ipt" type="password" placeholder="Digite sua senha"><br><br>
-                    <div id="botao">
-                        <button class="btn" onclick=entrarlogin();>Entrar</button>
-                        <button class="btn2" onclick=cadastro();>Cadastre-se</button>
-        
-                    </div>
-        
+
+        <div id="login">
+            <div id="conteudo">
+                <h1>Acesse sua conta</h1><br>
+
+                Login:<br>
+                <input id="usuario" class="ipt" type="text" placeholder="Insira seu nome de usuário"><br><br>
+                Senha:<br>
+                <input id="senha" class="ipt" type="password" placeholder="Digite sua senha"><br><br>
+                <div id="botao">
+                    <button class="btn" onclick=entrarlogin();>Entrar</button>
+                    <!-- <button class="btn2" onclick=cadastro();>Cadastre-se</button>-->
                 </div>
+
             </div>
+        </div>
 
     </div>
 
     <div id="footer">
-        Site desenvolvido por um aluno Bandtec Digital School - 2021
+        Site desenvolvido por alunos Bandtec Digital School © 2021
     </div>
 </body>
 
@@ -56,17 +56,17 @@
 
         if (String(usuario.value) == 'tomatopi' && senha.value == 'tomato123') {
 
-            alert("Logado Com Sucesso!");
+            alert("Logado com sucesso!");
 
 
         } else {
-            alert("Usuario ou Senha Incorretos!");
+            alert("Usuário ou senha incorretos!");
         }
     }
 
-    function cadastro() {
-        alert("Informações não encontradas, faça seu cadastro!");
-    }
+    // function cadastro() {
+    //     alert("Informações não encontradas, faça seu cadastro!");
+    // }
 
 
 </script>
