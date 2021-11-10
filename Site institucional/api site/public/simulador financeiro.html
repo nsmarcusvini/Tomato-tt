@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato π</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="fundo">
+
+    <div class="header">
+        <div class="container">
+            <h1 id="logotipo"> <img src="logo final branco.png" style="height: 70px;"></h1>
+            <ul class="navbar">
+                <li><a href="index.html">Inicio</a></li>
+                <li class="active"><a href="simulador financeiro.html">Simulador</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a> </li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="container" id="user">
+        <h1>Simulador Financeiro</h1><br>
+
+        <b>Quantidade de hectares:</b><br>
+        <input id="Hectare" type="text" placeholder="Exemplo: 15000"><br><br>
+
+        <b>Produção total:</b><br>
+        <input id="PT" type="text" placeholder="Exemplo: 450000"><br><br>
+
+        <button id="Prod" onclick="Perda()" class="btn2_simulador">Calcular produção</button><br>
+
+        <button id="TPI" style="display: none;" onclick="Tomato()" class="btn2_simulador">Calcular com <img
+                src="logo final branco.png" style="height: 30px"></button><br>
+
+    </div>
+
+
+    <div class="container">
+
+        <div id="conteudo" style="display: none; margin-bottom: 40px;">
+            <div id="Perdas"></div> <br>
+        </div>
+
+        <div id="conteudo2" style="display: none;">
+            <div id="TomatoPI"></div>
+
+        </div>
+
+    </div>
+
+    <div id="footer">
+        Site desenvolvido por alunos Bandtec Digital School © 2021
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+    function Perda() {
+
+        if (Hectare.value != "" || PT.value != "") {
+            var h = Number(Hectare.value)
+            var pt = Number(PT.value)
+            var ph = pt / h
+            var pte = ph
+            var pto = ph * 0.60
+            var pd = ph * 0.40
+            var bg = (pto * 100) / ph
+            var bb = 100
+            var barraR = (pd * 100) / ph
+
+            conteudo.style.display = 'block';
+
+            Perdas.innerHTML = `<h2>Produção atual</h2><br>
+            Estimativa de produção por hectare: ${pte.toFixed(2)}kg/ha <br>
+            <div style="background-color: #46b800; height: 30px ;width: ${bb}%;"></div><br><br>
+            Produção total obtida: ${pto.toFixed(2)}kg/ha <br>
+            <div style="background-color: #3a3b39; height: 30px; width: ${bg}%;"></div><br><br>
+            Perda por hectare: ${pd.toFixed(2)}kg/ha <br>
+            <div style="background-color: #c90000; height: 30px; width: ${barraR}%;"></div>`
+
+
+            TPI.style.display = 'Block'
+            Prod.style.display = 'None'
+        } else {
+            alert("Informe as informações necessárias")
+        }
+    }
+    function Tomato() {
+        var h = Number(Hectare.value)
+        var pt = Number(PT.value)
+        var ph = pt / h
+        var pte = ph
+        var pto = ph * 0.85
+        var pd = ph * 0.15
+        var bg = (pto * 100) / ph
+        var bb = 100
+        var barraR = (pd * 100) / ph
+
+        conteudo2.style.display = 'block';
+        Perdas.style.display = 'block';
+        TomatoPI.style.display = 'block';
+        TomatoPI.innerHTML = `<h2>Produção com <img src = "logo final.png" style="height: 40px;"></h2><br>
+        Estimativa de produção por hectare: ${pte.toFixed(2)}kg/ha <br>
+        <div style="background-color: green; height: 30px; width: ${bb}%;"></div><br><br>
+        Produção total obtida: ${pto.toFixed(2)}kg/ha <br>
+        <div style="background-color: black; height: 30px; width: ${bg}%;"></div><br><br>
+        Perda por hectare: ${pd.toFixed(2)}kg/ha <br>
+        <div style="background-color: red;height: 30px;width: ${barraR}%;"></div><br><br>`
+
+    }
+</script>
