@@ -1,8 +1,7 @@
--- Criando Banco de Dados Sprint2 --
-create database sprint2;
-drop database sprint2;
+create database tomatopi;
+drop database tomatopi;
 -- Selecionando Banco de Dados cultivo_tomato --
-use sprint2;
+use tomatopi;
 
 -- Criando Tabela Cadastro, com os campos: idCliente, nome, cnpj, email, telefone comercial e celular --
 create table cadastro (
