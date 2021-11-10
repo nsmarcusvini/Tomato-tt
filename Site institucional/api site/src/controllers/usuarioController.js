@@ -63,8 +63,6 @@ function cadastrar(req, res) {
     var nome = req.body.nome;
     var email = req.body.email;
     var senha = req.body.senha;
-    var cnpj = req.body.cnpj;
-    var usuario = req.body.usuario;
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -72,12 +70,6 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    }
-    else if (cnpj == undefined) {
-        res.status(400).send("Seu CNPJ está undefined!");
-    }
-    else if (usuario == undefined) {
-        res.status(400).send("Seu Usuario está undefined!");
     } else {
         usuarioModel.cadastrar(nome, email, senha)
         .then(
