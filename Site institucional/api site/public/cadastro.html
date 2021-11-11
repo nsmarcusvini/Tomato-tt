@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato π</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/funcoes.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <h1 id="logotipo"> <img src="./assets/img/logo final branco.png" style="height: 70px;"></h1>
+            <ul class="navbar">
+                <li><a href="index.html">Inicio</a></li>
+                <li> <a href="simulador financeiro.html">Simulador</a></li>
+                <li class="active"><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a> </li>
+                <li><a href="./api-sensor-dht1/dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="banner-login ">
+        <div class="container ">
+            <div class="card medio">
+                <h2>Bem-vindo!</h2>
+                <div class="formulario">
+                    <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+                        
+                        Nome da empresa:<br>
+                        <input  name="nome" placeholder="Insira o nome da empresa" class="ipt"><br><br>
+                        CNPJ:<br>
+                        <input  name="CNPJ" placeholder="Insira o CNPJ" class="ipt"><br><br>
+                        E-mail:<br>
+                        <input  name="email" placeholder="Insira seu e-mail" class="ipt" type="email"><br><br>
+                        Usuário:<br>
+                        <input  name="Usuario" placeholder="Escolha o nome de usuário" class="ipt"><br><br>
+                        Senha:<br>
+                        <input  type="password" name="senha" placeholder="Digite sua senha" class="ipt"><br><br>
+                        <br>
+                        Confirmação da Senha:
+                        <input name="confirmacao-senha" type="password" placeholder="******">
+                        <br>
+                        <button class="btn">Cadastrar</button>
+                    </form>
+                </div>
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+
+                <div id="div_erros_login">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--footer inicio-->
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por um aluno BandTec &copy; 2021</h4>
+        </div>
+    </div>
+    <!--footer fim-->
+    
+
+</body>
+
+</html>
+
+<script>
+
+    function limparFormulario() {
+        document.getElementById("form_cadastro").reset();
+    }
+
+    function cadastrar() {
+        aguardar();
+
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form_cadastro")));
+
+        var nome = formulario.get("nome");
+        var email = formulario.get("email");
+        var senha = formulario.get("senha");
+        var cnpj = formulario.get("CNPJ")
+        var usuario = formulario.get("Usuario")
+        var confirmacaoSenha = formulario.get("confirmacao-senha");
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (nome == "" || email == "" || senha == "" || confirmacaoSenha == "") {
+            
+            window.alert("Preencha todos os campos para prosseguir!");
+            if (nome == "")  {
+                console.log('nome está em branco')
+            }
+            if (email == "" )  {
+                console.log('email está em branco')
+            }
+            if (senha == "" )  {
+                console.log('senha está em branco')
+            }
+            if (confirmacaoSenha == "" )  {
+                console.log('confirmacaoSenha está em branco')
+            }
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (email.indexOf("@") == -1 || email.indexOf(".com") == -1) {
+            window.alert("Ops, USERe-mail inválido! Verifique e tente novamente.");
+            finalizarAguardar();
+            return false;
+        }
+        
+        if (senha != confirmacaoSenha) {
+            window.alert("As senhas inseridas devem ser iguais para prosseguir!");
+            finalizarAguardar();
+            return false;
+        }
+
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                window.alert("Cadastro realizado com sucesso!");
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+</script>

@@ -25,10 +25,10 @@ function listar(req, res) {
 }
 
 function entrar (req, res) {
-    var email = req.body.email;
+    var usuario = req.body.usuario;
     var senha = req.body.senha;
 
-    if (email == undefined) {
+    if (usuario == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
@@ -63,6 +63,8 @@ function cadastrar(req, res) {
     var nome = req.body.nome;
     var email = req.body.email;
     var senha = req.body.senha;
+    var cnpj = req.body.CNPJ;
+    var usuario =req.body.Usuario;
 
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -71,7 +73,7 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        usuarioModel.cadastrar(nome, email, senha)
+        usuarioModel.cadastrar(nome, cnpj, email, usuario, senha)
         .then(
             function (resultado) {
                 res.json(resultado);
