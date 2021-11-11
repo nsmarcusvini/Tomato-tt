@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomato π</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./assets/js/funcoes.js"></script>
 </head>
 
-<body>
+<body data-spy='scroll' data-target=".navbar" data-offset='50' class="body">
 
     <div class="header">
         <div class="container">
@@ -24,15 +25,14 @@
         </div>
     </div>
 
-    <div class="banner">
 
-        <div id="login">
-            <div id="conteudo">
-                <h1>Acesse sua conta</h1><br>
+    <div class="login-page" id="tela_login">
+        <div class="form">
+            <img src="fotos/avatar 2.png" class="avatar" width="120"  alt="">
+            <h1>Login</h1>
                 <div class="formulario">
-                    <form id="form_login" method="post" onsubmit="return entrar()">
-
-                Login:<br>
+                    <form id="form_login" class="login-form" method="post" onsubmit="return entrar()">
+                        Login:<br>
                 <input id="usuario" name="Usuario" class="ipt" type="text" placeholder="Insira seu nome de usuário"><br><br>
                 Senha:<br>
                 <input id="senha" name="senha" class="ipt" type="password" placeholder="Digite sua senha"><br><br>
@@ -40,18 +40,29 @@
                     <button class="btn" onclick=entrarlogin();>Entrar</button>
                     <!-- <button class="btn2" onclick=cadastro();>Cadastre-se</button>-->
                 </div>
+                    </form>
 
+
+                </div>
+
+                <div id="div_aguardar" class="loading-div">
+                    
+                </div>
+
+                <div id="div_erros_login">
+
+                </div>
             </div>
         </div>
-
     </div>
 
-    <div id="footer">
-        Site desenvolvido por alunos Bandtec Digital School © 2021
-    </div>
+
+
+
 </body>
 
 </html>
+
 <script>
 
     function limparFormulario() {
@@ -85,11 +96,11 @@
             if (resposta.ok) {
                 console.log(resposta);
 
-                resposta.json().then(function(json) {
+                resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
 
-                    sessionStorage.Usuario_USUARIO = json.usuario;
+                    sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
 
