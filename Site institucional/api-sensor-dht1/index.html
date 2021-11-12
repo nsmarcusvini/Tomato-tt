@@ -1,25 +1,46 @@
-
 <!doctype html>
 <html>
 
 <head>
-	<title>Line Chart</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
-	<script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-	<!-- <style>
-		canvas {
-			-moz-user-select: none;
-			-webkit-user-select: none;
-			-ms-user-select: none;
-		}
-	</style> -->
+    <title>Tomato π</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
+    <link rel="stylesheet" href="../api site/assets/css/style.css">
 </head>
 
-<body>
+<body id="fundo">
+    <div class="header">
+        <div class="container">
+            <h1 id="logotipo"> <img src="../api site/assets/img/logo final branco.png" style="height: 70px;"></h1>
+            <ul class="navbar">
+                <li><a href="../api site/index.html">Inicio</a></li>
+                <li><a href="../api site/simulador financeiro.html">Simulador</a></li>
+                <li><a href="../api site/cadastro.html">Cadastro</a></li>
+                <li><a href="../api site/login.html">Login</a> </li>
+                <li class="active"><a>Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="user" class="container">
+        <h1>Controle de temperatura e umidade</h1><br>
+        <h4>Empresa:</h4><br><br>
+        <h4>Fazenda:</h4><br><br>
+        <h4>Usuário:</h4>
+    </div>
+
+
 	<div>
 			<section>
-                <h1>Sensor LM35 - Temperatura</h1>
+                <h1>Temperatura média do ambiente:</h1>
 				<h2>Média: <label id='average'>0.00</label></h2>
 			</section>
 			<section style="width:50%">
@@ -28,7 +49,7 @@
 	</div>
 	<div>
 		<section>
-			<h1>Sensor DHT11 - Umidade</h1>
+			<h1>Umidade média do ambiente:</h1>
 			<h2>Média: <label id='averageHumidity'>0.00</label></h2>
 		</section>
 		<section style="width:50%">
