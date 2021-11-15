@@ -42,7 +42,7 @@
 }
 .banner{
     height: 100vh;
-    background-image: url(banner2.png);
+    background-image: url('../assets/img/banner2.png');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -51,7 +51,7 @@
 }
 .banner2{
     height: 100vh;
-    background-image: url(banner4.jpg);
+    background-image: url('../assets/img/banner2.png');
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;

@@ -25,13 +25,11 @@
         </div>
     </div>
 
-    <div class="banner-login ">
-        <div class="container ">
-            <div class="card medio">
-                <h2>Bem-vindo!</h2>
-                <div class="formulario">
+    <div class="banner2">
+        <div class="container">
+                <div id="user">
+                    <h2>Bem-vindo!</h2><br>
                     <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
-                        
                         Nome da empresa:<br>
                         <input  name="nome" placeholder="Insira o nome da empresa" class="ipt"><br><br>
                         CNPJ:<br>
@@ -42,29 +40,27 @@
                         <input  name="Usuario" placeholder="Escolha o nome de usuário" class="ipt"><br><br>
                         Senha:<br>
                         <input  type="password" name="senha" placeholder="Digite sua senha" class="ipt"><br><br>
-                        <br>
-                        Confirmação da Senha:
-                        <input name="confirmacao-senha" type="password" placeholder="******">
-                        <br>
+                        Confirmação da Senha:<br>
+                        <input name="confirmacao-senha" type="password" placeholder="******" class="ipt">
+                        <br><br>
                         <button class="btn">Cadastrar</button>
                     </form>
-                </div>
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                    <div id="div_aguardar" class="loading-div">
+                        <img src="./assets/circle-loading.gif" id="loading-gif">
+                    </div>
                 </div>
 
                 <div id="div_erros_login">
                     
                 </div>
-            </div>
+            
         </div>
     </div>
 
     <!--footer inicio-->
-    <div class="footer">
-        <div class="container">
-            <h4>Feito com amor por um aluno BandTec &copy; 2021</h4>
-        </div>
+    <div id="footer">
+        Site desenvolvido por alunos Bandtec Digital School © 2021
+    </div>
     </div>
     <!--footer fim-->
     
