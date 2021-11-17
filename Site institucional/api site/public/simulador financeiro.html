@@ -19,7 +19,6 @@
                 <li class="active"><a href="simulador financeiro.html">Simulador</a></li>
                 <li><a href="cadastro.html">Cadastro</a></li>
                 <li><a href="login.html">Login</a> </li>
-                <li><a href="../api-sensor-dht1/index.html">Dashboard</a></li>
             </ul>
         </div>
     </div>
@@ -38,7 +37,7 @@
         <button id="Prod" onclick="Perda()" class="btn2_simulador">Calcular produção</button><br>
 
         <button id="TPI" style="display: none;" onclick="Tomato()" class="btn2_simulador">Calcular com <img
-                src="./assets/img/logo final branco.png" style="height: 30px"></button><br>
+                src="../public/assets/img/logo final branco.png" style="height: 30px"></button><br>
 
     </div>
 
@@ -110,7 +109,7 @@
         conteudo2.style.display = 'block';
         Perdas.style.display = 'block';
         TomatoPI.style.display = 'block';
-        TomatoPI.innerHTML = `<h2>Produção com <img src = "logo final.png" style="height: 40px;"></h2><br>
+        TomatoPI.innerHTML = `<h2>Produção com <img src = "../public/assets/img/logo final.png" style="height: 40px;"></h2><br>
         Estimativa de produção por hectare: ${pte.toFixed(2)}kg/ha <br>
         <div style="background-color: green; height: 30px; width: ${bb}%;"></div><br><br>
         Produção total obtida: ${pto.toFixed(2)}kg/ha <br>

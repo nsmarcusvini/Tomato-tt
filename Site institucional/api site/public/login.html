@@ -20,40 +20,44 @@
                 <li><a href="simulador financeiro.html">Simulador</a></li>
                 <li><a href="cadastro.html">Cadastro</a> </li>
                 <li class="active"><a href="login.html">Login</a></li>
-                <li><a href="../api-sensor-dht1/index.html">Dashboard</a></li>
             </ul>
         </div>
     </div>
 
 
     <div class="banner">
-        <div class="container" id="user">
-            <img src="fotos/avatar 2.png" class="avatar" width="120"  alt="">
-            <h1>Login</h1>
+        <div id="login">
+            <div id="conteudo">
+
+                <img src="fotos/avatar 2.png" class="avatar" width="120" alt="">
+                <h1>Login</h1>
                 <div class="formulario">
                     <form id="form_login" class="login-form" method="post" onsubmit="return entrar()">
                         Login:<br>
-                <input id="usuario" name="Usuario" class="ipt" type="text" placeholder="Insira seu nome de usuário"><br><br>
-                Senha:<br>
-                <input id="senha" name="senha" class="ipt" type="password" placeholder="Digite sua senha"><br><br>
-                <div id="botao">
-                    <button class="btn" onclick=entrarlogin();>Entrar</button>
-                    <!-- <button class="btn2" onclick=cadastro();>Cadastre-se</button>-->
-                </div>
-                    </form>
+                        <input id="usuario" name="Usuario" class="ipt" type="text"
+                            placeholder="Insira seu nome de usuário"><br><br>
+                        Senha:<br>
+                        <input id="senha" name="senha" class="ipt" type="password"
+                            placeholder="Digite sua senha"><br><br>
 
+                        <div id="botao">
+                            <button class="btn" onclick=entrarlogin();>Entrar</button>
+                            <!-- <button class="btn2" onclick=cadastro();>Cadastre-se</button>-->
+                        </div>
+                    </form>
 
                 </div>
 
                 <div id="div_aguardar" class="loading-div">
-                    
+
                 </div>
-            </div>
 
                 <div id="div_erros_login">
-
                 </div>
+
             </div>
+        </div>
+
     </div>
 
     <div id="footer">
