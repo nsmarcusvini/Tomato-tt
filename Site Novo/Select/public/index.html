@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+	<link rel="icon" href="fotos/logo sem letra.ico">
+	<title>API INDEX</title>
+	<style>
+		body {
+			background-color: rgb(229, 225, 243);
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Enviando Dados No Banco:</h1>
+		<h2 style="color: red;">Atenção não feche esta página, caso contrário os dados não irão ser inseridos</h2>
+
+		<br>
+		<h3 style="color: rgb(148, 118, 245);">Métricas direto do banco de dados:</h3>
+		<h4>Média Temperatura: <span id="average"></span>°C //// Média Umidade: <span id="average2"></span>%</h4>
+		<h4>Máximo de Temperatura: <span id="max_temp"></span>°C //// Máximo de Umidade: <span id="max_umi"></span>%
+		</h4>
+		<h4>Mínimo de Temperatura: <span id="min_temp"></span>°C //// Mínimo de Umidade: <span id="min_umi"></span>%
+		</h4>
+		<h4>Total De Linhas No banco: <span id="total_linhas"></span></h4>
+		<h4>Status do Arduino: <span id="status_arduino"></span></h4>
+		<h3 style="color: blue;">Log de dados:</h3>
+		<div id="resultados"></div>
+	</div>
+
+	<script>
+		var cont2 = 0;
+		var max_dados_temp = 0;
+		var min_dados_temp = 0;
+		var max_dados_umi = 0;
+		var min_dados_umi = 0;
+		var cont = 0;
+		var mediatemp = [];
+		var mediaumi = [];
+		var temp_total = [];
+		var umi_total = [];
+		var idreal = 0;
+		var antes = 0;
+		function leitura() {
+
+
+
+
+
+
+			fetch("/medidas/listar", {
+				method: "GET",
+			}).then(function (resposta) {
+
+			
+				resposta.json().then(function (data) {
+
+					var len = data.length;
+					for (let i = 0; i <= 1; i++) {
+						let arquivo = data;
+
+						console.log(`Dados recebidos: ${JSON.stringify(arquivo[len - 1])}`);
+						temp_total = [];
+						umi_total = [];
+						for (j = 0; j < data.length; j++) {
+							// Alterar o .temp para nome da coluna temperatura
+							if (arquivo[j].temp != undefined) {
+								temp_total.push(parseFloat(arquivo[j].temp));
+
+							}
+							// Alterar o .umi para nome da coluna umidade
+							if (arquivo[j].umi != undefined) {
+								umi_total.push(parseFloat(arquivo[j].umi));
+
+							}
+						}
+
+					}
+					let arq = data;
+
+					cont2++; //alterar 0 .idDados para o nome da coluna de id dos dados
+					resultados.innerHTML += (`<span style="font-weight: bolder;">ID De Inserção: ${arq[arq.length - 1].idDados} - Inserindo dados: Umidade: ${umi_total[umi_total.length - 1]}% - Temperatura: ${temp_total[temp_total.length - 1]}°C</span><br>`);
+					cont++;
+
+					if (cont == 15) {
+						resultados.innerHTML = '';
+						cont = 0;
+					}
+					//alterar 0 .idDados para o nome da coluna de id dos dados
+					if (arq[arq.length - 1].idDados == antes) {
+						resultados.innerHTML = '';
+						status_arduino.innerHTML = '<span style="font-weight: bolder; color: red;">API Desconectada!! Não há Dados Sendo Inseridos.</span>';
+					} else {
+						status_arduino.innerHTML = '<span style="font-weight: bolder; color: green;">API Conectada!!</span>';
+
+					}
+					//alterar 0 .idDados para o nome da coluna de id dos dados
+					antes = arq[arq.length - 1].idDados;
+					let sum = umi_total.reduce((a, b) => a + b);
+					let sum2 = temp_total.reduce((a, b) => a + b);
+
+
+					mediaumi = sum / umi_total.length;
+					mediatemp = sum2 / umi_total.length;
+					document.getElementById('average2').textContent = mediaumi.toFixed(1);
+					document.getElementById('average').textContent = mediatemp.toFixed(1);
+					document.getElementById('total_linhas').textContent = arq[arq.length - 1].idDados.toFixed(0); //alterar 0 .idDados para o nome da coluna de id dos dados
+
+
+
+
+
+					max_dados_temp = temp_total.reduce(function (a, b) {
+						return Math.max(a, b);
+					});
+					max_dados_umi = umi_total.reduce(function (a, b) {
+						return Math.max(a, b);
+					});
+
+					document.getElementById('max_temp').textContent = max_dados_temp.toFixed(1);
+					document.getElementById('max_umi').textContent = max_dados_umi.toFixed(1);
+
+					min_dados_temp = temp_total.reduce(function (a, b) {
+						return Math.min(a, b);
+					});
+					min_dados_umi = umi_total.reduce(function (a, b) {
+						return Math.min(a, b);
+					});
+
+					document.getElementById('min_temp').textContent = min_dados_temp.toFixed(1);
+					document.getElementById('min_umi').textContent = min_dados_umi.toFixed(1);
+
+
+				});
+			}).catch(function (error) {
+				console.error(`ERROR`, error);
+			})
+			
+		}
+
+		function envio(){
+			var http = new XMLHttpRequest();
+			http.open('POST', 'http://localhost:3000/api/sendData', false);
+			http.send(null);
+		}
+
+
+		setInterval(() => {
+			leitura();
+			envio();
+		}, 1000);
+
+
+		
+	</script>
+</body>
+
+</html>
