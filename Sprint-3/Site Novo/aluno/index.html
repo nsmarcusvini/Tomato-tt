@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart</title>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+	<!-- <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Sensor DHT 11 - Umidade</h1>
+			<section>
+				<h2>Média: <label id='average'>0.00</label></h2>
+			</section>
+			<section style="width:100%">
+				<canvas id="chart"></canvas>
+			</section>
+		<h1>Sensor DHT 11 - Temperatura</h1>
+			<section>
+				<h2>Média: <label id="average2">0.00</label></h2>
+			</section>
+			<section style="width: 100%;">
+				<canvas id="chart2"></canvas>
+			</section>
+		<h1>Luminosidade</h1>
+			<section>
+				<h2>Média: <label id="average3">0.00</label></h2>
+			</section>
+			<section style="width: 100%;">
+				<canvas id="chart3"></canvas>
+			</section>
+		<h1>LM35 - Temperatura</h1>
+		<section>
+			<h2>Média: <label id="average4">0.00</label></h2>
+		</section>
+		<section style="width: 100%;">
+			<canvas id="chart4"></canvas>
+		</section>
+	</div>
+	
+	<script>
+
+
+			function sendSensorsData(){
+				var http = new XMLHttpRequest();
+				http.open('POST', 'http://localhost:3000/api/sendData', false);
+				http.send(null);
+		}
+
+        setInterval(() => {
+			sendSensorsData();
+        }, 2000);
+	</script>
+</body>
+
+</html>

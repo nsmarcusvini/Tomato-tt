@@ -1,0 +1,385 @@
+
+<!doctype html>
+<html>
+
+<head>
+	<title>Line Chart</title>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+	<!-- <script src="http://www.chartjs.org/samples/latest/utils.js"></script> -->
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Sensor DHT 11 - Umidade</h1>
+			<section>
+				<h2>Média: <label id='average'>0.00</label></h2>
+			</section>
+			<section style="width:100%">
+				<canvas id="chart"></canvas>
+			</section>
+		<h1>Sensor DHT 11 - Temperatura</h1>
+			<section>
+				<h2>Média: <label id="average2">0.00</label></h2>
+			</section>
+			<section style="width: 100%;">
+				<canvas id="chart2"></canvas>
+			</section>
+		<h1>Luminosidade</h1>
+			<section>
+				<h2>Média: <label id="average3">0.00</label></h2>
+			</section>
+			<section style="width: 100%;">
+				<canvas id="chart3"></canvas>
+			</section>
+		<h1>LM35 - Temperatura</h1>
+		<section>
+			<h2>Média: <label id="average4">0.00</label></h2>
+		</section>
+		<section style="width: 100%;">
+			<canvas id="chart4"></canvas>
+		</section>
+	</div>
+	
+	<script>
+
+		var context = document.getElementById("chart").getContext("2d");
+		context.canvas.width = 1000;
+		context.canvas.height = 300;
+        
+        var configuration = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Umidade",
+					type: 'line',
+					borderColor: ['#45b3e7'],
+					backgroundColor: ['#89cff0']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						distribution: 'series',
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Umidade'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+        };
+        
+		var chart = new Chart(context, configuration);
+
+        //Função para obter os dados de temperatura do server
+        //Seria mais interessante fazer isso com WebSocket, porém para fins academicos, os dados serão atualizados via HTTP
+        
+        //Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
+        //hora de montar/atualizar o gráfico
+        this.lastIndexTemp = 0;
+        this.time = 0;
+
+        function get_data(){
+
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3000/api', false);
+            http.send(null);        
+			
+            var obj = JSON.parse(http.responseText);
+			//Assinar ao primero index
+			obj = obj[0];
+            if (obj.data.length == 0){
+                return;
+            }
+
+            var _lastIndexTemp = this.lastIndexTemp;
+            this.lastIndexTemp = obj.data.length;
+            listTemp = obj.data.slice(_lastIndexTemp);
+
+            listTemp.forEach(data => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10){
+                    chart.data.labels.shift();
+                    chart.data.datasets[0].data.shift();
+                }
+
+                chart.data.labels.push(this.time++);
+                chart.data.datasets[0].data.push(parseFloat(data));
+                chart.update();
+			});
+			
+			document.getElementById('average').textContent = obj.average;
+		} 
+
+
+		var context2 = document.getElementById("chart2").getContext("2d");
+		context2.canvas.width = 1000;
+		context2.canvas.height = 300;
+        
+        var configuration2 = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Temperatura",
+					type: 'line',
+					borderColor: ['#ff3232'],
+					backgroundColor: ['#ff7f7f']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						distribution: 'series',
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Luminosidade'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+        };
+        
+		var chart2 = new Chart(context2, configuration2);
+
+        //Função para obter os dados de temperatura do server
+        //Seria mais interessante fazer isso com WebSocket, porém para fins academicos, os dados serão atualizados via HTTP
+        
+        //Esse atributo dentro do contexto serve para saber qual foi o último índice processado, assim eliminado os outros elementos na
+        //hora de montar/atualizar o gráfico
+        this.lastIndexTemp2 = 0;
+        this.time2 = 0;
+
+        function get_data2(){
+
+            var http = new XMLHttpRequest();
+            http.open('GET', 'http://localhost:3000/api', false);
+            http.send(null);        
+			
+            var obj2 = JSON.parse(http.responseText);
+			//Assinar ao segundo index
+			obj2 = obj2[1];
+            if (obj2.data.length == 0){
+                return;
+            }
+
+            var _lastIndexTemp2 = this.lastIndexTemp2;
+            this.lastIndexTemp2 = obj2.data.length;
+            listTemp2 = obj2.data.slice(_lastIndexTemp2);
+
+            listTemp2.forEach(data => {
+                //Máximo de 60 itens exibidos no gráfico
+                if (chart2.data.labels.length == 10 && chart2.data.datasets[0].data.length == 10){
+                    chart2.data.labels.shift();
+                    chart2.data.datasets[0].data.shift();
+                }
+
+                chart2.data.labels.push(this.time++);
+                chart2.data.datasets[0].data.push(parseFloat(data));
+                chart2.update();
+			});
+			
+			document.getElementById('average2').textContent = obj2.average;
+		}
+
+		var context3 = document.getElementById("chart3").getContext("2d");
+		context3.canvas.width = 1000;
+		context3.canvas.height = 300;
+        
+        var configuration3 = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Luminosidade",
+					type: 'line',
+					borderColor: ['#ffd902'],
+					backgroundColor: ['#ffe135']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						distribution: 'series',
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Luminosidade'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+        };
+        
+		var chart3 = new Chart(context3, configuration3);
+
+        this.lastIndexTemp3 = 0;
+        this.time3 = 0;
+
+		
+		function get_data3(){
+
+			var http = new XMLHttpRequest();
+			http.open('GET', 'http://localhost:3000/api', false);
+			http.send(null);        
+
+			var obj = JSON.parse(http.responseText);
+			//Assinar ao segundo index
+			obj = obj[2];
+			if (obj.data.length == 0){
+				return;
+			}
+
+			var _lastIndexTemp3 = this.lastIndexTemp3;
+			this.lastIndexTemp3 = obj.data.length;
+			listTemp3 = obj.data.slice(_lastIndexTemp3);
+
+			listTemp3.forEach(data => {
+				//Máximo de 60 itens exibidos no gráfico
+				if (chart3.data.labels.length == 10 && chart3.data.datasets[0].data.length == 10){
+					chart3.data.labels.shift();
+					chart3.data.datasets[0].data.shift();
+				}
+
+				chart3.data.labels.push(this.time++);
+				chart3.data.datasets[0].data.push(parseFloat(data));
+				chart3.update();
+			});
+
+			document.getElementById('average3').textContent = obj.average;
+			}
+
+
+        
+        var configuration4 = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Temperatura",
+					type: 'line',
+					borderColor: ['#581845'],
+					backgroundColor: ['#581845']
+				}]
+			},
+			options: {
+				scales: {
+					xAxes: [{
+						distribution: 'series',
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'Luminosidade'
+                        },
+                        ticks: {
+                            beginAtZero:true
+                        }
+					}]
+				},
+				animation: {
+					duration: 0
+				}
+			}
+        };
+
+		var context4 = document.getElementById("chart4").getContext("2d");
+		context4.canvas.width = 1000;
+		context4.canvas.height = 300;
+        
+		var chart4 = new Chart(context4, configuration4);
+
+        this.lastIndexTemp4 = 0;
+        this.time4 = 0;
+
+		
+		function get_data4(){
+
+			var http = new XMLHttpRequest();
+			http.open('GET', 'http://localhost:3000/api', false);
+			http.send(null);        
+
+			var obj = JSON.parse(http.responseText);
+			//Assinar ao segundo index
+			console.log(obj)
+			obj = obj[3];
+			if (obj.data.length == 0){
+				return;
+			}
+
+			var _lastIndexTemp4 = this.lastIndexTemp4;
+			this.lastIndexTemp4 = obj.data.length;
+			listTemp4 = obj.data.slice(_lastIndexTemp4);
+
+			listTemp4.forEach(data => {
+				//Máximo de 60 itens exibidos no gráfico
+				if (chart4.data.labels.length == 10 && chart4.data.datasets[0].data.length == 10){
+					chart4.data.labels.shift();
+					chart4.data.datasets[0].data.shift();
+				}
+
+				chart4.data.labels.push(this.time++);
+				chart4.data.datasets[0].data.push(parseFloat(data));
+				chart4.update();
+			});
+
+			document.getElementById('average4').textContent = obj.average;
+			}
+
+			function sendSensorsData(){
+				var http = new XMLHttpRequest();
+				http.open('POST', 'http://localhost:3000/api/sendData', false);
+				http.send(null);
+		}
+
+        setInterval(() => {
+			get_data();
+			get_data2();
+			get_data3();
+			get_data4();
+			sendSensorsData();
+        }, 1000);
+	</script>
+</body>
+
+</html>

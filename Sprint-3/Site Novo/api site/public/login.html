@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato π</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./assets/js/funcoes.js"></script>
+</head>
+
+<body data-spy='scroll' data-target=".navbar" data-offset='50' class="body">
+
+    <div class="header">
+        <div class="container">
+            <h1 id="logotipo"> <img src="./assets/img/logo final branco.png" style="height: 70px;"></h1>
+            <ul class="navbar">
+                <li><a href="index.html"> Inicio</a></li>
+                <li><a href="simulador financeiro.html">Simulador</a></li>
+                <li><a href="cadastro.html">Cadastro</a> </li>
+                <li class="active"><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="banner">
+        <div id="login">
+            <div id="conteudo">
+
+                <img src="fotos/avatar 2.png" class="avatar" width="120" alt="">
+                <h1>Login</h1>
+                <div class="formulario">
+                    <form id="form_login" class="login-form" method="post" onsubmit="return entrar()">
+                        Login:<br>
+                        <input id="usuario" name="Usuario" class="ipt" type="text"
+                            placeholder="Insira seu nome de usuário"><br><br>
+                        Senha:<br>
+                        <input id="senha" name="senha" class="ipt" type="password"
+                            placeholder="Digite sua senha"><br><br>
+
+                        <div id="botao">
+                            <button class="btn" onclick=entrarlogin();>Entrar</button>
+                            <!-- <button class="btn2" onclick=cadastro();>Cadastre-se</button>-->
+                        </div>
+                    </form>
+
+                </div>
+
+                <div id="div_aguardar" class="loading-div">
+
+                </div>
+
+                <div id="div_erros_login">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="footer">
+        Site desenvolvido por alunos Bandtec Digital School © 2021
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+
+    function limparFormulario() {
+        document.getElementById("form_login").reset();
+    }
+
+    function entrar() {
+        aguardar();
+
+        var formulario = new URLSearchParams(new FormData(document.getElementById("form_login")));
+
+        var usuario = formulario.get("Usuario");
+        var senha = formulario.get("senha");
+
+        console.log("FORM LOGIN: ", usuario);
+        console.log("FORM SENHA: ", senha);
+
+        // TODO: VERIFICAR AS VALIDAÇÕES QUE ELES ESTÃO APRENDENDO EM ALGORITMOS 
+        if (usuario == "" || senha == "") {
+            window.alert("Preencha todos os campos para prosseguir!");
+            finalizarAguardar();
+            return false;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.usuario;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>
