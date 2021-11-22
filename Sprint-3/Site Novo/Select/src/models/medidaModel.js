@@ -3,7 +3,9 @@ var database = require("../database/config");
 
 
 function listar() {
-    var instrucao = `
+    var instrucao = 
+    // select dos dados em tempo real da tabela 'dadoshistoricos' //
+    `
         SELECT * FROM dadoshistoricos;
     `; 
     console.log("Executando a instrução SQL: \n"+instrucao);

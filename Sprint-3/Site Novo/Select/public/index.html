@@ -44,11 +44,7 @@
 		var antes = 0;
 		function leitura() {
 
-
-
-
-
-
+// método GET para puxar os dados do banco //
 			fetch("/medidas/listar", {
 				method: "GET",
 			}).then(function (resposta) {
@@ -64,10 +60,12 @@
 						temp_total = [];
 						umi_total = [];
 						for (j = 0; j < data.length; j++) {
+							// puxando os dados do campo 'dadosTemperatura' //
 							if (arquivo[j].dadosTemperatura != undefined) {
 								temp_total.push(parseFloat(arquivo[j].temp));
 
 							}
+							// puxando os dados do campo 'dadosUmidade' //
 							if (arquivo[j].dadosUmidade != undefined) {
 								umi_total.push(parseFloat(arquivo[j].umi));
 
