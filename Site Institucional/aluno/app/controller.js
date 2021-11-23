@@ -1,6 +1,3 @@
-
-
-
 const express = require('express');
 const { ArduinoDataTemp } = require('./newserial');
 const db = require('./database')
@@ -23,20 +20,20 @@ router.get('/', (request, response, next) => {
 
 });
 
-
 router.post('/sendData', (request, response) => {
-
+    var fk = 1000;
     var umidade  =  ArduinoDataTemp.List[0].data;
-    var temperatura_dht11 = ArduinoDataTemp.List[1].data;
-    var sql = "INSERT INTO dadoshistoricos (dadosUmidade, dadosTemperatura) VALUES (?, ?)";
-
-    db.query(sql, [umidade[umidade.length - 1], temperatura_dht11[temperatura_dht11.length - 1]] , function(err, result) {
+    var temperaturadht  =  ArduinoDataTemp.List[1].data;
+    var sql = "INSERT INTO dadoshistoricos (dadosUmidade, dadosTemperatura, fkFazenda) VALUES (?, ?, ?);";
+    let data2 = new Date();
+    db.query(sql, [umidade[umidade.length - 1], temperaturadht[temperaturadht.length - 1], fk] , function(err, result) {
         if (err) throw err;
-        console.log("Number of records inserted: " + result.affectedRows);
+        console.log("DADOS INSERIDOS COM SUCESSO -- LINHAS AFETADAS: " + result.affectedRows);
       });
       
-      
+    
     response.sendStatus(200);
 })
+
 
 module.exports = router;

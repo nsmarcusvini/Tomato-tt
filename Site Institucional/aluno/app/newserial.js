@@ -13,12 +13,11 @@ class ArduinoRead {
             "average": 0
             },
             {
-            'name': 'TemperaturaDHT11',
-                'data': [],
+            'name': 'Temperatura',
+            'data': [],
             'total': 0,
             "average": 0
-            }
-        ];
+            }];
         this.__listDataTemp = [];
     }
 
@@ -27,6 +26,28 @@ class ArduinoRead {
         return this.listData;
         
     }
+
+    fake_data() {
+        setInterval(() => {
+            let dht11 = sensors.dht11(20, 80, 0, 50);
+
+            if (this.listData.length === 59) {
+                while (this.listData.length > 0) {
+                    this.listData.pop();
+                } 
+            }
+            let temp = dht11;
+            if (temp.length === this.listData.length){
+                temp.map((item, index)=>{
+                    console.log('Leitura - ' + this.listData[index].name + ': ' + item);
+                    this.listData[index].data.push(parseInt(item))
+                })
+            }
+            
+            
+        }, 1000);
+    }
+
 
     SetConnection() {
         SerialPort.list().then(listSerialDevices => {
@@ -37,6 +58,7 @@ class ArduinoRead {
 
             if (listArduinoSerial.length != 1) {
                 console.log("Arduino not found - Generating data");
+                this.fake_data();
             } else {
                 console.log("Arduino found in the com %s", listArduinoSerial[0].path);
                 return listArduinoSerial[0].path;
@@ -49,10 +71,11 @@ class ArduinoRead {
                 arduino.pipe(parser);
                 arduino.on('close',() => {
                     console.log('Lost Connection');
+                    this.fake_data();
                 });
                 parser.on('data', (data) => {
                     console.log(data)
-                    let temp = data.replace(/\r/g,'').split(';')
+                    let temp = data.replace(/\r/g,'').split(';');
                     if (temp.length === this.listData.length){
                         temp.map((item, index)=>{
                             console.log('Leitura - ' + this.listData[index].name + ': ' + item);

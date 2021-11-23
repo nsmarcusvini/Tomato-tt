@@ -1,10 +1,10 @@
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var connection = mysql.createConnection({
-    host     : 'localhost',
+    host     : 'cakcio.mysql.database.azure.com',
     port     : '3306',
-    user     : 'root',
-    password : 'bandtec',
-    database : 'tomatopi'
+    user     : 'calciouniverse@cakcio',
+    password : 'calcio@123',
+    database : 'Calcio'
 });
 
 connection.connect(function(err) {
