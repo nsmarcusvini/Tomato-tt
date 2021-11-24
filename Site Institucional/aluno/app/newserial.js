@@ -5,19 +5,31 @@ const Readline = SerialPort.parsers.Readline;
 class ArduinoRead {
 
     constructor() {
-        this.listData = [
-            {
+        this.listData = [{
             'name': 'Umidade',
             'data': [],
             'total': 0,
             "average": 0
             },
             {
-            'name': 'Temperatura',
+            'name': 'TemperaturaDHT11',
             'data': [],
             'total': 0,
             "average": 0
-            }];
+            },
+            {
+            'name': 'Luminosidade',
+            'data': [],
+            'total': 0,
+            "average": 0
+            },
+            {
+            'name': 'TemperaturaLM35',
+            'data': [],
+            'total': 0,
+            "average": 0
+            }
+        ];
         this.__listDataTemp = [];
     }
 
@@ -74,8 +86,7 @@ class ArduinoRead {
                     this.fake_data();
                 });
                 parser.on('data', (data) => {
-                    console.log(data)
-                    let temp = data.replace(/\r/g,'').split(';');
+                    let temp = data.replace(/\r/g,'').split(';')
                     if (temp.length === this.listData.length){
                         temp.map((item, index)=>{
                             console.log('Leitura - ' + this.listData[index].name + ': ' + item);

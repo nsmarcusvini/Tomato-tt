@@ -62,12 +62,12 @@
 						for (j = 0; j < data.length; j++) {
 							// puxando os dados do campo 'dadosTemperatura' //
 							if (arquivo[j].dadosTemperatura != undefined) {
-								temp_total.push(parseFloat(arquivo[j].temp));
+								temp_total.push(parseFloat(arquivo[j].dadosTemperatura));
 
 							}
 							// puxando os dados do campo 'dadosUmidade' //
 							if (arquivo[j].dadosUmidade != undefined) {
-								umi_total.push(parseFloat(arquivo[j].umi));
+								umi_total.push(parseFloat(arquivo[j].dadosUmidade));
 
 							}
 						}

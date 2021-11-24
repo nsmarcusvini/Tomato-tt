@@ -6,13 +6,12 @@ use tomatopi;
 -- Criando Tabela Cadastro, com os campos: idCliente, nome, cnpj, email, telefone comercial e celular --
 create table cadastro (
 idCliente int primary key auto_increment,
-nomeEmpresa varchar (45),
-CNPJ char (18),
+nome varchar (45),
 email varchar (45),
-senha varchar(10),
-usuario varchar(45)
-
+senha varchar (40),
+cnpj varchar (13)
 );
+
 select *from cadastro;
 
 -- Criando Tabela Usuários, com os campos: idUsuario, nome, cidade, usuário, senha e fkCadastro --
@@ -83,10 +82,9 @@ idDados int primary key auto_increment,
 dtDados datetime default current_timestamp,
 dadosUmidade float,
 dadosTemperatura float,
-fkFazenda int,
-foreign key (fkFazenda) references fazenda (idFazenda)
+fkFazenda int
 ) auto_increment = 200;
-
+select * from dadoshistoricos;
 -- Inserindo os dados na tabela dados historicos --
 insert into dadoshistoricos (dadosUmidade,dadosTemperatura,fkFazenda)values
 ('70%','25ºC',500),

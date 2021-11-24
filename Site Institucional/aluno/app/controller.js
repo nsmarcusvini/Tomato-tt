@@ -21,11 +21,11 @@ router.get('/', (request, response, next) => {
 });
 
 router.post('/sendData', (request, response) => {
-    var fk = 1000;
+    var fk = 500;
     var umidade  =  ArduinoDataTemp.List[0].data;
     var temperaturadht  =  ArduinoDataTemp.List[1].data;
     var sql = "INSERT INTO dadoshistoricos (dadosUmidade, dadosTemperatura, fkFazenda) VALUES (?, ?, ?);";
-    let data2 = new Date();
+    
     db.query(sql, [umidade[umidade.length - 1], temperaturadht[temperaturadht.length - 1], fk] , function(err, result) {
         if (err) throw err;
         console.log("DADOS INSERIDOS COM SUCESSO -- LINHAS AFETADAS: " + result.affectedRows);
