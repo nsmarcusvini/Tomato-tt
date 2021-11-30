@@ -32,12 +32,10 @@ router.post('/sendData', (request, response) => {
 
     var umidade  =  ArduinoDataTemp.List[0].data;
     var temperatura_dht11 = ArduinoDataTemp.List[1].data;
-    var luminosidade = ArduinoDataTemp.List[2].data;
-    var temperatura_lm35 = ArduinoDataTemp.List[3].data;
 
-    var sql = "INSERT INTO medidas (umidade, temperatura_dht11, luminosidade, temperatura_lm35) VALUES (?, ?, ?, ?)";
+    var sql = "INSERT INTO dadoshistoricos (dadosumidade, dadostemperatura) VALUES (?, ?)";
 
-    db.query(sql, [umidade[0], temperatura_dht11[0], luminosidade[0], temperatura_lm35[0]] , function(err, result) {
+    db.query(sql, [umidade[umidade.length -1], temperatura_dht11[temperatura_dht11.length - 1]] , function(err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
       });

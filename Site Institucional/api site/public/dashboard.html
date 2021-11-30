@@ -30,14 +30,9 @@
         </div>
     </div>
 	
-	<div id="msg_atencao">
-		
-	</div>
 	
-	<div id="msg_atencao2">
-		
-	</div>
-
+	
+	
     <div id="user" class="container">
         <h1>Controle de temperatura e umidade</h1><br>
         <h4>Empresa:</h4><br><br>
@@ -50,16 +45,28 @@
     <div class="container">
         <div id="user">
             <section>
-                <h1>Temperatura média do ambiente:</h1>
-                <h2>Média: <label id='average2'>0.00</label></h2>
+                <h1>Umidade média do ambiente:</h1>
+                <h2>Média: <label id='average'>0.00</label></h2>
+                <h3>
+                    <div id="msg_atencao2">
+             
+                    </div>
+                </h3>
             </section>
             <section style="width:100%">
                 <canvas id="chart"></canvas>
-                <section>
+            </section>
         
             <section>
-                <h1>Umidade média do ambiente:</h1>
-                <h2>Média: <label id='average'>0.00</label></h2>
+
+                <h1>Temperatura média do ambiente:</h1>
+                <h2>Média: <label id='average2'>0.00</label></h2>
+                <h3>
+                    <div id="msg_atencao">
+            
+                    </div>
+                </h3>
+            
             </section>
             <section style="width:100%">
                 <canvas id="chart2"></canvas>
@@ -257,94 +264,90 @@
 
 
 
-       }
+       
 	   
-	   for (var i = 0; i <= temp_total.length; i++){
+	   for (var i = 0; i < 1; i++){
 	   
-			if (temp_total[i] >= 27) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: red">ATENÇÃO!! A Temperatura da sua estufa está em estado crítico!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] >= 25 && temp_total[i] < 27) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: orange">ATENÇÃO!! A Temperatura da sua estufa está em estado de emergência!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] < 25 && temp_total[i] > 24) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: yellow">ATENÇÃO!! A Temperatura da sua estufa está em estado de alerta!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] < 22 && temp_total[i] > 21) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: yellow">ATENÇÃO!! A Temperatura da sua estufa está em estado de alerta!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] < 21 && temp_total[i] > 19) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: orange">ATENÇÃO!! A Temperatura da sua estufa está em estado de emergência!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] <= 19) {
-				msg_atencao.innerHTML = (
-                    `<p style="color: red">ATENÇÃO!! A Temperatura da sua estufa está em estado crítico!</p><br>`
-                );
-			}
-			
-			if (temp_total[i] >= 22 && temp_total[i] <= 24){
-				msg_atencao.innerHTML = (
-                    `<p style="color: green">Captação de temperatura OK!</p><br>`
-                );
-			}
-			
-			
-			
-			if (umi_total[i] >= 16.2) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: red">ATENÇÃO!! A Umidade da sua estufa está em estado crítico!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] >= 14.2 && umi_total[i] < 16.2) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: orange">ATENÇÃO!! A Umidade da sua estufa está em estado de emergência!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] < 14.2 && umi_total[i] > 11.2) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: yellow">ATENÇÃO!! A Umidade da sua estufa está em estado de alerta!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] < 10.8 && umi_total[i] > 7.8) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: yellow">ATENÇÃO!! A Umidade da sua estufa está em estado de alerta!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] <= 7.8 && umi_total[i] > 5.8) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: orange">ATENÇÃO!! A Umidade da sua estufa está em estado de emergência!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] <= 5.8) {
-				msg_atencao2.innerHTML = (
-                    `<p style="color: red">ATENÇÃO!! A Umidade da sua estufa está em estado crítico!</p><br>`
-                );
-			}
-			
-			if (umi_total[i] >= 10.8 && umi_total[i] <= 11.2) {
-                msg_atencao.innerHTML = (
-                    `<p style="color: green">Captação de umidade OK!</p><br>`
-                );
+			if (temp_total[temp_total.length - 1] >= 27) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura esta crítico`);
+            }
+
+
+
+            if (temp_total[temp_total.length - 1] >= 25 && temp_total[temp_total.length - 1] < 27) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em emergência`);
+            }
+
+
+
+
+            if (temp_total[temp_total.length - 1] < 25 && temp_total[temp_total.length - 1] > 24) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em alerta máximo`);
+            }
+
+
+
+            if (temp_total[temp_total.length - 1] < 22 && temp_total[temp_total.length - 1] > 21) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em alerta mínimo`);
+            }
+
+
+
+            if (temp_total[temp_total.length - 1] <= 21 && temp_total[temp_total.length - 1] > 19) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em emergência mínima`);
+            }
+
+
+
+            if (temp_total[temp_total.length - 1] <= 19) {
+                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está crítico mínimo`);
+            }
+
+
+
+            if (temp_total[temp_total.length - 1] >= 22 && temp_total[temp_total.length - 1] <= 24) {
+                msg_atencao.innerHTML = (`Estado de temperatura está OK`);
+            }
+
+            if (umi_total[umi_total.length - 1] >= 62) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está crítico`);
+            }
+
+
+
+            if (umi_total[umi_total.length - 1] >= 56 && umi_total[umi_total.length - 1] < 62) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em emergência máximo`);
+            }
+
+
+
+            if (umi_total[umi_total.length - 1] < 56 && umi_total[umi_total.length - 1] > 51) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em alerta máximo`);
+            }
+
+
+
+            if (umi_total[umi_total.length - 1] < 49 && umi_total[umi_total.length - 1] > 47) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em alerta mínimo`);
+            }
+
+
+
+            if (umi_total[umi_total.length - 1] <= 47 && umi_total[umi_total.length - 1] > 45) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em emergência mínima`);
+            }
+
+
+
+            if (umi_total[umi_total.length - 1] <= 45) {
+                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está crítico mínimo`);
+            }
+
+
+            if (umi_total[umi_total.length - 1] >= 10.8 && umi_total[umi_total.length - 1] <= 11.2) {
+                document.getElementById('status_umid').style.backgroundColor = 'green';
+            }
+
             }
 	   
 		}
