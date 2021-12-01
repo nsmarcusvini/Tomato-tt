@@ -128,7 +128,7 @@
 			});
 			
 			document.getElementById('average').textContent = obj.average;
-		} 
+		
 
 
 		var context2 = document.getElementById("chart2").getContext("2d");
@@ -179,11 +179,7 @@
         this.lastIndexTemp2 = 0;
         this.time2 = 0;
 
-        function get_data2(){
-
-            var http = new XMLHttpRequest();
-            http.open('GET', 'http://localhost:3000/api', false);
-            http.send(null);        
+           
 			
             var obj2 = JSON.parse(http.responseText);
 			//Assinar ao segundo index
@@ -209,7 +205,7 @@
 			});
 			
 			document.getElementById('average2').textContent = obj2.average;
-		}
+		
 
 		var context3 = document.getElementById("chart3").getContext("2d");
 		context3.canvas.width = 1000;
@@ -255,11 +251,8 @@
         this.time3 = 0;
 
 		
-		function get_data3(){
-
-			var http = new XMLHttpRequest();
-			http.open('GET', 'http://localhost:3000/api', false);
-			http.send(null);        
+		
+    
 
 			var obj = JSON.parse(http.responseText);
 			//Assinar ao segundo index
@@ -285,7 +278,7 @@
 			});
 
 			document.getElementById('average3').textContent = obj.average;
-			}
+			
 
 
         
@@ -333,11 +326,8 @@
         this.time4 = 0;
 
 		
-		function get_data4(){
-
-			var http = new XMLHttpRequest();
-			http.open('GET', 'http://localhost:3000/api', false);
-			http.send(null);        
+		
+      
 
 			var obj = JSON.parse(http.responseText);
 			//Assinar ao segundo index
@@ -373,12 +363,9 @@
 		}
 
         setInterval(() => {
-			get_data();
-			get_data2();
-			get_data3();
-			get_data4();
 			sendSensorsData();
-        }, 1000);
+			//get_data();
+        }, 500);
 	</script>
 </body>
 

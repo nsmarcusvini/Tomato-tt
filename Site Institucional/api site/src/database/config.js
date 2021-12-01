@@ -2,26 +2,26 @@ var mysql = require("mysql2");
 var sql = require('mssql');
 
 // CONEXÃO DO SQL SERVER - AZURE (NUVEM)
-var sqlServerConfig = {
-    user: "tomatopi",
-    password: "tomato@123",  
-    database: "TomatoPI",
-    server: "tomatopi.database.windows.net",
-    pool: {
-        max: 10,
-        min: 0,
-        idleTimeoutMillis: 30000
-    },
-    options: {  
-        encrypt: true, // for azure
-    }
-}
+// var sqlServerConfig = {
+//     user: "tomatopi",
+//     password: "tomato@123",  
+//     database: "TomatoPI",
+//     server: "tomatopi.database.windows.net",
+//     pool: {
+//         max: 10,
+//         min: 0,
+//         idleTimeoutMillis: 30000
+//     },
+//     options: {  
+//         encrypt: true, // for azure
+//     }
+// }
 
 // CONEXÃO DO MYSQL WORKBENCH (LOCAL)
 var mySqlConfig = {
-    host: "localhost",
+    host: "127.0.0.1",
     user: "root",
-    password: "1234",
+    password: "bandtec",
     database: "tomatopi",
 };
 
