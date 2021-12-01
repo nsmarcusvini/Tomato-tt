@@ -14,365 +14,403 @@
         }
     </style>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 </head>
 
 <body id="fundo" onload="validarSessao()">
+    <div class="container-janela">
 
-    <input type="checkbox" id="check">
-        <!-- O for é responsável por ligar o input ao label, tipo checkbox é uma caixa clicável, e ligado ao input, ao clicar na imagem ela ativa o checkbox -->
-        <label for="check">
-            <img src="assets/img/hamburguer.png" alt="">
-        </label>
-        <div class="nav">
-            <div>
-                <img src="./assets/img/logo final branco.png" style="height: 70px;">
+        <div class="janela">
 
-                <h4>Olá <span id="usuarionomespan"></span>!</h4><br>
-                <h4>Email:</h4> <span id="emailuser"></span><br><br>
-
-                <h4>Empresa:</h4>
-                <span id="empresauser"></span><br>
-                <h4>Fazenda:</h4><span id="fazendauser"></span>
+            <input type="checkbox" id="check">
+            <!-- O for é responsável por ligar o input ao label, tipo checkbox é uma caixa clicável, e ligado ao input, ao clicar na imagem ela ativa o checkbox -->
+            <label for="check">
+                <img src="assets/img/hamburguer.png" alt="">
+            </label>
+            <div class="nav">
+                <div>
+                    <img src="./assets/img/logo final branco.png">
+                </div>
+                <div>
+                    <ul>
+                        <li><a href="../public/insights.html">Insights</a></li>
+                        <li><a href="../public/index.html">Início</a></li>
+                        <li><a href="../public/simulador financeiro.html">Simulador Financeiro</a></li>
+                        <li><a href="../public/login.html">Logout</a></li>
+                    </ul>
+                </div>
             </div>
-            <div>
-                <ul>
-                    <li><a href="../public/index.html">Inicio</a></li>
-                    <li><a href="../public/simulador financeiro.html">Simulador</a></li>
-                    <li><a href="../public/login.html">Logout</a></li>
-                </ul>
+
+            <div class="container-dash">
+                <div class="dash">
+
+                    <div class="regua">
+                        <div class="item-regua perigo-frio">
+                            <h4>Crítico 1</h4>
+                            <h2>19°C</h2>
+                            <h2>45%</h2>
+                        </div>
+                        <div class="item-regua alerta-frio">
+                            <h4>Alerta</h4>
+                            <h2>21°C</h2>
+                            <h2>%</h2>
+                        </div>
+                        <div class="item-regua ideal">
+                            <h4>Ideal</h4>
+                            <h2>0°C</h2>
+                            <h2>%</h2>
+                        </div>
+                        <div class="item-regua alerta-quente">
+                            <h4>Alerta</h4>
+                            <h2>25°C</h2>
+                            <h2>%</h2>
+                        </div>
+                        <div class="item-regua perigo-quente">
+                            <h4>Crítico 2</h4>
+                            <h2>27°C</h2>
+                            <h2>62%</h2>
+                        </div>
+                    </div>
+
+                    <div class="graphs">
+                        <section>
+                            <h3>Umidade média do ambiente: <label id='average'>0.00</label></h3>
+                        </section>
+                        <section style="width:100%">
+                            <canvas id="chart"></canvas>
+                        </section>
+
+                        <section>
+
+                            <h3>Temperatura média do ambiente: <label id='average2'>0.00</label></h3>
+                            
+                        </section>
+
+                        <section style="width:100%">
+                            <canvas id="chart2"></canvas>
+                            <section>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="lateral">
+                    <h4>Olá <span id="usuarionomespan"></span>!</h4><br>
+                    Você está logado como:<br><br>
+                    <h4>Email:</h4> <span id="emailuser"></span><br><br>
+
+                    <h4>Empresa:</h4>
+                    <span id="empresauser"></span><br>
+                    <h4>Fazenda:</h4><span id="fazendauser"></span><br><br>
+                        <div id="msg_atencao2">
+
+                        </div>
+                        <div id="msg_atencao">
+
+                        </div>
+                </div>
             </div>
         </div>
+        <script>
+            var max_dados_temp = 0;
+            var min_dados_temp = 0;
+            var max_dados_umi = 0;
+            var min_dados_umi = 0;
+            var umi_contr = 0;
+            var umi_conto = 0;
+            var umi_conty = 0;
+            var temp_conty = 0;
+            var temp_conto = 0;
+            var temp_contr = 0;
+            var cont = 0;
+            var temp = [];
+            var umi = [];
+            var mediatemp = [];
+            var mediaumi = [];
+            var esq_umi = 0;
+            var dir_umi = 0;
+            var meio_umi = 0;
+            var esq_temp = 0;
+            var dir_temp = 0;
+            var meio_temp = 0;
+            var prim_quartil_temp = 0;
+            var terc_quartil_temp = 0;
+            var terc_quartil_umid = 0;
+            var prim_quartil_umid = 0;
+            var resto_umi = 0;
+            var resto_temp = 0;
+            var f_temp = 0;
+            var f_umi = 0;
+            var terc_resto_umi = 0;
+            var terc_resto_temp = 0;
+            var terc_f_temp = 0;
+            var terc_f_umi = 0;
+            var scrollPosition = 0;
+            const velocity = 1000;
+            var temp_total = [];
+            var umi_total = [];
+            var arquivo;
+            var len = 0;
+            var momento;
 
-    <div class="container">
-        <div id="user">
-            <section>
-                <h2>Umidade média do ambiente: <label id='average'>0.00</label></h2>
-                <h3>
-                    <div id="msg_atencao2">
-             
-                    </div>
-                </h3>
-            </section>
-            <section style="width:100%">
-                <canvas id="chart"></canvas>
-            </section>
-        
-            <section>
+            var context = document.getElementById("chart").getContext("2d");
+            context.canvas.width = 1000;
+            context.canvas.height = 300;
 
-                <h2>Temperatura média do ambiente: <label id='average2'>0.00</label></h2>
-                <h3>
-                    <div id="msg_atencao">
-    
-                    </div>
-                </h3>
-            </section>
+            var configuration = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "Umidade - Tempo real (%)",
+                        borderColor: '#34baeb',
+                        backgroundColor: '#34baeb50',
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            distribution: 'series',
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Umidade (%)'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    animation: {
+                        duration: 0
+                    }
+                }
+            };
+            var context2 = document.getElementById("chart2").getContext("2d");
+            context2.canvas.width = 1000;
+            context2.canvas.height = 300;
 
-            <section style="width:100%">
-                <canvas id="chart2"></canvas>
-                <section>
-        </div>
-    </div>
+            var configuration2 = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "Temperatura - Tempo real (°C)",
+                        borderColor: '#e00f00',
+                        backgroundColor: '#e00f0050',
+                    }]
+                },
+                options: {
 
-    <script>
-        var max_dados_temp = 0;
-   var min_dados_temp = 0;
-   var max_dados_umi = 0;
-   var min_dados_umi = 0;
-   var umi_contr = 0;
-   var umi_conto = 0;
-   var umi_conty = 0;
-   var temp_conty = 0;
-   var temp_conto = 0;
-   var temp_contr = 0;
-   var cont = 0;
-   var temp = [];
-   var umi = [];
-   var mediatemp = [];
-   var mediaumi = [];
-   var esq_umi = 0;
-   var dir_umi = 0;
-   var meio_umi = 0;
-   var esq_temp = 0;
-   var dir_temp = 0;
-   var meio_temp = 0;
-   var prim_quartil_temp = 0;
-   var terc_quartil_temp = 0;
-   var terc_quartil_umid = 0;
-   var prim_quartil_umid = 0;
-   var resto_umi = 0;
-   var resto_temp = 0;
-   var f_temp = 0;
-   var f_umi = 0;
-   var terc_resto_umi = 0;
-   var terc_resto_temp = 0;
-   var terc_f_temp = 0;
-   var terc_f_umi = 0;
-   var scrollPosition = 0;
-   const velocity = 1000;
-   var temp_total = [];
-   var umi_total = [];
-   var arquivo;
-   var len = 0;
-   var momento;
+                    scales: {
+                        xAxes: [{
+                            distribution: 'series',
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Temperatura (°C)'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                    animation: {
+                        duration: 0
+                    }
+                }
+            };
 
-       var context = document.getElementById("chart").getContext("2d");
-   context.canvas.width = 1000;
-   context.canvas.height = 300;
+            var chart = new Chart(context, configuration);
+            var chart2 = new Chart(context2, configuration2);
+            this.lastIndexTemp = 0;
+            this.time = 0;
 
-   var configuration = {
-       type: 'line',
-       data: {
-           datasets: [{
-               label: "Umidade (%)",
-               borderColor: '#34baeb',
-               backgroundColor: '#34baeb50',
-           }]
-       },
-       options: {
-           scales: {
-               xAxes: [{
-                   distribution: 'series',
-                   ticks: {
-                       beginAtZero: true
-                   }
-               }],
-               yAxes: [{
-                   scaleLabel: {
-                       display: true,
-                       labelString: 'Umidade (%)'
-                   },
-                   ticks: {
-                       beginAtZero: true
-                   }
-               }]
-           },
-           animation: {
-               duration: 0
-           }
-       }
-   };
-   var context2 = document.getElementById("chart2").getContext("2d");
-   context2.canvas.width = 1000;
-   context2.canvas.height = 300;
+            function get_data() {
 
-   var configuration2 = {
-       type: 'line',
-       data: {
-           datasets: [{
-               label: "Temperatura (°C)",
-               borderColor: '#e00f00',
-               backgroundColor: '#e00f0050',
-           }]
-       },
-       options: {
+                fetch("/medidas/listar", {
+                    method: "GET",
+                }).then(function (resposta) {
 
-           scales: {
-               xAxes: [{
-                   distribution: 'series',
-                   ticks: {
-                       beginAtZero: true
-                   }
-               }],
-               yAxes: [{
-                   scaleLabel: {
-                       display: true,
-                       labelString: 'Temperatura (°C)'
-                   },
-                   ticks: {
-                       beginAtZero: true
-                   }
-               }]
-           },
-           animation: {
-               duration: 0
-           }
-       }
-   };
+                    //console.log("resposta: ", resposta);
 
-   var chart = new Chart(context, configuration);
-   var chart2 = new Chart(context2, configuration2);
-       this.lastIndexTemp = 0;
-       this.time = 0;
+                    resposta.json().then(function (data) {
 
-       function get_data() {
+                        len = data.length;
 
-           fetch("/medidas/listar", {
-           method: "GET",
-       }).then(function (resposta) {
-
-           //console.log("resposta: ", resposta);
-
-           resposta.json().then(function (data) {
-  
-               len = data.length;
-               
-                   arquivo = data;
-                    console.log(`Dados recebidos: ${JSON.stringify(arquivo[len-1])}`);
-                   temp_total = [];
-                   umi_total = [];
-                  
-                  
-                   for (j = 0; j < data.length; j++) {
-
-                       if (arquivo[j].dadosTemperatura != undefined) {
-                           temp_total.push(parseFloat(arquivo[j].dadosTemperatura));
-                       }
-                       if (arquivo[j].dadosUmidade != undefined) {
-                           umi_total.push(parseFloat(arquivo[j].dadosUmidade));
-
-                       }
-                   }
-
-                   
-       
-
-       
+                        arquivo = data;
+                        console.log(`Dados recebidos: ${JSON.stringify(arquivo[len - 1])}`);
+                        temp_total = [];
+                        umi_total = [];
 
 
-                   cont = temp_total.length;
-                   if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10) {
-                       chart.data.labels.shift();
-                       chart.data.datasets[0].data.shift();
-                   }
+                        for (j = 0; j < data.length; j++) {
 
-                   chart.data.labels.push(this.time++);
-                   chart.data.datasets[0].data.push(parseFloat(umi_total[umi_total.length - 1]));
-                   chart.update();
+                            if (arquivo[j].dadosTemperatura != undefined) {
+                                temp_total.push(parseFloat(arquivo[j].dadosTemperatura));
+                            }
+                            if (arquivo[j].dadosUmidade != undefined) {
+                                umi_total.push(parseFloat(arquivo[j].dadosUmidade));
 
-                   if (chart2.data.labels.length == 10 && chart2.data.datasets[0].data.length == 10) {
-                       chart2.data.labels.shift();
-                       chart2.data.datasets[0].data.shift();
-                   }
-
-                   chart2.data.labels.push(this.time++);
-                   chart2.data.datasets[0].data.push(parseFloat(temp_total[temp_total.length - 1]));
-                   chart2.update();
-
-                   let sum = umi_total.reduce((a, b) => a + b);
-        let sum2 = temp_total.reduce((a, b) => a + b);
-
-
-        mediaumi = sum / umi_total.length;
-        mediatemp = sum2 / umi_total.length;
-        document.getElementById('average').textContent = mediaumi.toFixed(1);
-        document.getElementById('average2').textContent = mediatemp.toFixed(1);
-
-           });
-       }).catch(function (error) {
-           console.error(`ERROR`, error);
-       });
+                            }
+                        }
 
 
 
-       
-	   
-	   for (var i = 0; i < 1; i++){
-	   
-			if (temp_total[temp_total.length - 1] >= 27) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura esta crítico`);
+
+
+
+
+                        cont = temp_total.length;
+                        if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10) {
+                            chart.data.labels.shift();
+                            chart.data.datasets[0].data.shift();
+                        }
+
+                        chart.data.labels.push(this.time++);
+                        chart.data.datasets[0].data.push(parseFloat(umi_total[umi_total.length - 1]));
+                        chart.update();
+
+                        if (chart2.data.labels.length == 10 && chart2.data.datasets[0].data.length == 10) {
+                            chart2.data.labels.shift();
+                            chart2.data.datasets[0].data.shift();
+                        }
+
+                        chart2.data.labels.push(this.time++);
+                        chart2.data.datasets[0].data.push(parseFloat(temp_total[temp_total.length - 1]));
+                        chart2.update();
+
+                        let sum = umi_total.reduce((a, b) => a + b);
+                        let sum2 = temp_total.reduce((a, b) => a + b);
+
+
+                        mediaumi = sum / umi_total.length;
+                        mediatemp = sum2 / umi_total.length;
+                        document.getElementById('average').textContent = mediaumi.toFixed(1);
+                        document.getElementById('average2').textContent = mediatemp.toFixed(1);
+
+                    });
+                }).catch(function (error) {
+                    console.error(`ERROR`, error);
+                });
+
+
+
+
+
+                for (var i = 0; i < 1; i++) {
+
+                    if (temp_total[temp_total.length - 1] >= 27) {
+                        msg_atencao.innerHTML = (`<h3 style="color: #34baeb;">ATENÇÃO! O estado de temperatura está crítico 2</h3>`);
+                    }
+
+
+
+                    if (temp_total[temp_total.length - 1] >= 25 && temp_total[temp_total.length - 1] < 27) {
+                        msg_atencao.innerHTML = (`<h3 style="color: orange;">ATENÇÃO! O estado de temperatura está em emergência<h3>`);
+                    }
+
+
+
+
+                    if (temp_total[temp_total.length - 1] < 25 && temp_total[temp_total.length - 1] > 24) {
+                        msg_atencao.innerHTML = (`<h3 style="color: #fff645;">ATENÇÃO! O estado de temperatura está em alerta máximo</h3>`);
+                    }
+
+
+
+                    if (temp_total[temp_total.length - 1] < 22 && temp_total[temp_total.length - 1] > 21) {
+                        msg_atencao.innerHTML = (`<h3 style="color: #42A5F5;">ATENÇÃO! O estado de temperatura está em alerta mínimo</h3>`);
+                    }
+
+
+
+                    if (temp_total[temp_total.length - 1] <= 21 && temp_total[temp_total.length - 1] > 19) {
+                        msg_atencao.innerHTML = (`<h3 style="color: ;">ATENÇÃO! O estado de temperatura está em emergência mínima</h3>`);
+                    }
+
+
+
+                    if (temp_total[temp_total.length - 1] <= 19) {
+                        msg_atencao.innerHTML = (`<h3 style="color: #1c548c;">ATENÇÃO! O estado de temperatura está crítico 1</h3>`);
+                    }
+
+
+
+                    if (temp_total[temp_total.length - 1] >= 22 && temp_total[temp_total.length - 1] <= 24) {
+                        msg_atencao.innerHTML = (`<h3 style="color: #4fb336;">Temperatura ideal</h3>`);
+                    }
+
+                    if (umi_total[umi_total.length - 1] >= 62) {
+                        msg_atencao2.innerHTML = (`<h3 style="color: #34baeb;">ATENÇÃO! O estado de umidade está crítico 2</h3>`);
+                    }
+
+
+
+                    if (umi_total[umi_total.length - 1] >= 56 && umi_total[umi_total.length - 1] < 62) {
+                        msg_atencao2.innerHTML = (`<h3 style="color: orange;">ATENÇÃO! O estado de umidade está em emergência máximo</h3>`);
+                    }
+
+
+
+                    if (umi_total[umi_total.length - 1] < 56 && umi_total[umi_total.length - 1] > 51) {
+                        msg_atencao2.innerHTML = (`<h3 style="color: #fff645;">ATENÇÃO! O estado de umidade está em alerta máximo</h3>`);
+                    }
+
+
+
+                    if (umi_total[umi_total.length - 1] < 49 && umi_total[umi_total.length - 1] > 47) {
+                        msg_atencao2.innerHTML = (`<h3 style="color: #42A5F5">ATENÇÃO! O estado de umidade está em alerta mínimo</h3>`);
+                    }
+
+
+
+                    if (umi_total[umi_total.length - 1] <= 47 && umi_total[umi_total.length - 1] > 45) {
+                        msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em emergência mínima`);
+                    }
+
+
+
+                    if (umi_total[umi_total.length - 1] <= 45) {
+                        msg_atencao2.innerHTML = (`<h3 style="color: #1c548c;">ATENÇÃO! O estado de umidade está crítico 1</h3>`);
+                    }
+
+
+                    if (umi_total[umi_total.length - 1] >= 10.8 && umi_total[umi_total.length - 1] <= 11.2) {
+                        document.getElementById('status_umid').style.backgroundColor = 'green';
+                    }
+
+                }
+
+            }
+
+            setInterval(() => {
+                get_data();
+            }, 1000);
+
+            function validarSessao() {
+                // aguardar();
+
+                var email = sessionStorage.EMAIL_USUARIO;
+                var usuarionome = sessionStorage.NOME_USUARIO;
+                // var empresa = sessionStorage.NOME_USUARIO;
+                // var fazenda = sessionStorage.NOME_USUARIO;
+
+                usuarionomespan.innerHTML = (` ${usuarionome} `);
+                emailuser.innerHTML = (` ${email} `);
+                empresauser.innerHTML = (`${empresa}`);
+                fazendauser.innerHTML = (`${fazenda}`);
             }
 
 
-
-            if (temp_total[temp_total.length - 1] >= 25 && temp_total[temp_total.length - 1] < 27) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em emergência`);
-            }
-
-
-
-
-            if (temp_total[temp_total.length - 1] < 25 && temp_total[temp_total.length - 1] > 24) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em alerta máximo`);
-            }
-
-
-
-            if (temp_total[temp_total.length - 1] < 22 && temp_total[temp_total.length - 1] > 21) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em alerta mínimo`);
-            }
-
-
-
-            if (temp_total[temp_total.length - 1] <= 21 && temp_total[temp_total.length - 1] > 19) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está em emergência mínima`);
-            }
-
-
-
-            if (temp_total[temp_total.length - 1] <= 19) {
-                msg_atencao.innerHTML = (`ATENÇÃO! O estado de temperatura está crítico mínimo`);
-            }
-
-
-
-            if (temp_total[temp_total.length - 1] >= 22 && temp_total[temp_total.length - 1] <= 24) {
-                msg_atencao.innerHTML = (`Estado de temperatura está OK`);
-            }
-
-            if (umi_total[umi_total.length - 1] >= 62) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está crítico`);
-            }
-
-
-
-            if (umi_total[umi_total.length - 1] >= 56 && umi_total[umi_total.length - 1] < 62) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em emergência máximo`);
-            }
-
-
-
-            if (umi_total[umi_total.length - 1] < 56 && umi_total[umi_total.length - 1] > 51) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em alerta máximo`);
-            }
-
-
-
-            if (umi_total[umi_total.length - 1] < 49 && umi_total[umi_total.length - 1] > 47) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em alerta mínimo`);
-            }
-
-
-
-            if (umi_total[umi_total.length - 1] <= 47 && umi_total[umi_total.length - 1] > 45) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está em emergência mínima`);
-            }
-
-
-
-            if (umi_total[umi_total.length - 1] <= 45) {
-                msg_atencao2.innerHTML = (`ATENÇÃO! O estado de umidade está crítico mínimo`);
-            }
-
-
-            if (umi_total[umi_total.length - 1] >= 10.8 && umi_total[umi_total.length - 1] <= 11.2) {
-                document.getElementById('status_umid').style.backgroundColor = 'green';
-            }
-
-            }
-	   
-		}
-
-       setInterval(() => {
-           get_data();
-       }, 1000);
-
-       function validarSessao() {
-        // aguardar();
-    
-        var email = sessionStorage.EMAIL_USUARIO;
-        var usuarionome = sessionStorage.NOME_USUARIO;
-        // var empresa = sessionStorage.NOME_USUARIO;
-        // var fazenda = sessionStorage.NOME_USUARIO;
-        
-            usuarionomespan.innerHTML = (` ${usuarionome} `);         
-            emailuser.innerHTML = (` ${email} `);     
-            empresauser.innerHTML = (`${empresa}`);
-            fazendauser.innerHTML = (`${fazenda}`);
-    }
-	
-	
-    </script>
+        </script>
 </body>
 
 </html>

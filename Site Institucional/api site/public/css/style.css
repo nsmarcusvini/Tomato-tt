@@ -248,6 +248,108 @@
 
 /* DASHBOARD */
 
+.janela {
+    display: flex;
+    width: 100vw;
+    /* height: 100vh; */
+}
+
+.dash {
+    width: 750px;
+    position: relative;
+    top: 10px;
+    left: 10%;
+    background-color: black;
+    border-radius: 30px;
+    border: solid black 0.3px;
+    box-shadow: 4px 4px 0.02px black;
+    height: 200px;
+    margin-right: 20px;
+    /*display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;*/
+}
+
+.container-dash{
+    width: 90%;
+    height: 100%;
+    margin-left: 150px;
+    margin-right: 100px;
+}
+
+.regua {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+    
+}
+
+.perigo-frio {
+    background-color: #1c548c;
+    border-radius: 100%;
+}
+
+.perigo-quente {
+    border-radius: 100%;
+    background-color: #e00f00;
+}
+
+.alerta-frio {
+    border-radius: 100%;
+    background-color: #42A5F5;
+}
+
+.alerta-quente {
+    border-radius: 100%;
+    background-color: #fff645;
+}
+
+.ideal {
+    border-radius: 100%;
+    background-color: #4fb336;
+}
+
+.item-regua {
+    padding: 10px;
+    width: 15%;
+    margin: 5px;
+    text-align: center;
+}
+
+section{
+    margin: 30px;
+}
+
+.graphs{
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: white;
+    border: solid black 4px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 0.05px black;
+    margin-top: 15px;
+}
+
+.lateral{
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #1f1f1f;
+    border: solid black 4px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 0.05px black;
+    margin-top: 15px;
+    width: 270px;
+    height: 500px;
+    color: white;
+}
+
 /* Início MENU HAMBURGUER */
 .nav ul a{
     text-decoration: none;
@@ -263,7 +365,7 @@
 .nav ul {
     padding-left: 10px;
     list-style: none;
-    top: 250px;
+    top: 100px;
     position: absolute;
     width: 100%;
 }
@@ -287,8 +389,16 @@ input[type="checkbox"]:checked ~ .nav{
     transform: translateX(-350px);
 }
 
+input[type="checkbox"]:checked ~ div{
+    /* mexer no eixo X na horizontal */
+    transform: translateX(-100px);
+}
+
+.container-janela{
+    width: 100%;
+}
 .nav{
-    width: 250px;
+    width: 180px;
     height: 100%;
     background: black;
     left: 0px;
@@ -298,13 +408,12 @@ input[type="checkbox"]:checked ~ .nav{
     border: 1px solid whitesmoke;
     padding: 15px;
     color: white;
+    font-size: 14px;
 }
 
 .nav img{
     margin-left: 30px;
+    margin-bottom: 20px;
+    height: 50px;
 }
 /* Fim MENU HAMBURGUER */
-
-section{
-    margin: 30px;
-}
