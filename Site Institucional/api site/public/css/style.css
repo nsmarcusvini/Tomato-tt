@@ -22,9 +22,9 @@
 }
 .navbar{
     display: flex;
-    width: 35%;
     flex-direction: row;
     list-style: none;
+    width: 40%;
     justify-content: space-between;
 }
 .navbar li{
@@ -244,4 +244,67 @@
     height: 85px;
     position: relative;
     width: 100%;
+}
+
+/* DASHBOARD */
+
+/* Início MENU HAMBURGUER */
+.nav ul a{
+    text-decoration: none;
+    padding: 15px 5px;
+    display: block;
+    color: white;
+}
+
+.nav ul a:hover{
+    color: red;
+}
+
+.nav ul {
+    padding-left: 10px;
+    list-style: none;
+    top: 250px;
+    position: absolute;
+    width: 100%;
+}
+
+label{
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+}
+
+label img{
+    height: 50px;
+}
+
+input[type="checkbox"]{
+    display: none;
+}
+
+input[type="checkbox"]:checked ~ .nav{
+    /* mexer no eixo X na horizontal */
+    transform: translateX(-350px);
+}
+
+.nav{
+    width: 250px;
+    height: 100%;
+    background: black;
+    left: 0px;
+    position: absolute;
+    transition: all .5s;
+    border-radius: 10px;
+    border: 1px solid whitesmoke;
+    padding: 15px;
+    color: white;
+}
+
+.nav img{
+    margin-left: 30px;
+}
+/* Fim MENU HAMBURGUER */
+
+section{
+    margin: 30px;
 }
