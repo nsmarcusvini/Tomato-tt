@@ -1,9 +1,12 @@
+-- Criando o Banco de Dados tomatopi --
 create database tomatopi;
+
  -- drop database tomatopi;
--- Selecionando Banco de Dados cultivo_tomato --
+
+-- Selecionando Banco de Dados tomatopi --
 use tomatopi;
 
--- Criando Tabela Cadastro, com os campos: idCliente, nome, cnpj, email, telefone comercial e celular --
+-- Criando Tabela Cadastro, com os campos: idCliente, nome, email, senha, usuário e cnpj --
 create table cadastro (
 idCliente int primary key auto_increment,
 nome varchar (45),
