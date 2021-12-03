@@ -18,7 +18,7 @@ cnpj varchar (13)
 
 select *from cadastro;
 
--- Criando Tabela Usuários, com os campos: idUsuario, nome, cidade, usuário, senha e fkCadastro --
+-- Criando Tabela Usuários, com os campos: idUsuario, nome, email, senha, cnpj e fkCadastro --
 create table usuario (
 idUsuario int primary key auto_increment,
 nome varchar (45),
@@ -29,17 +29,8 @@ fkCadastro int,
 foreign key (fkCadastro) references cadastro (idCliente)
 );
 
--- Inserindo dados na tabela cadastro --
-insert into cadastro(nomeEmpresa,CNPJ,emailEmpresa,telComercial,telCelular) values
-('Benedita e Bernardo Alimentos ME','08.700.284/0001-30','producao@beneditaebernardoalimentosme.com.br','(11) 3550-1448','(11) 98765-5432'),
-('Nelson e Vicente Alimentos ME','00.128.259/0001-12','orcamento@nelsonevicentealimentosme.com.br','(19) 2724-3293','(11) 98765-1111'),
-('Fazendas Brandão','09.432.725/0001-23','administracao@vanessaecarlaadegame.com.br','(11) 2881-4840','(11) 98765-2222'),
-('MARFRIG GLOBAL FOODS','24.024.735/0001-13','marfrig@foodstomate.com.br','(19) 3552-3206','(11) 98765-5555'),
-('BUNGE ALIMENTOS','39.299.885/0001-07','bunge@alimentos.com.br','(19) 2839-6786','(11) 98765-5454'),	
-('Fazenda do Cultivo','81.518.290/0001-61','fazenda.cultivo@bandtec.com.br','(11) 3767-5067','(11) 98765-0000');
-
 -- Inserindo dados na tabela usuário --
-insert into usuario (nomeUsuario,cidade,usuario,senha,fkCadastro) values
+insert into usuario (nome,email,senha,cnpj,fkCadastro) values
 ('Bruno Tavares','Piracicaba-SP','bat.95','1234567890',1),
 ('Marcus Vinicius','Sumaré','marcusvini','1010101010',2),
 ('Breno Padovani','Itu','bpadovani','2020202020',3),
@@ -80,23 +71,17 @@ foreign key (fkFazenda) references acesso (idAcesso)
 ); 
 -- 
 
--- Criando Tabela Dados Históricos, com os campos: idDados, data, dadosUmidade, dadosTemperatura e fkSensor --
+-- Criando Tabela Dados Históricos, com os campos: idDados, dtDados, dadosUmidade, dadosTemperatura, dadosLuminosidade, dadosTempLM e fkFazenda --
 create table dadoshistoricos (
 idDados int primary key auto_increment,
 dtDados datetime default current_timestamp,
 dadosUmidade float,
 dadosTemperatura float,
+dadosLuminosidade float,
+dadosTempLM float,
 fkFazenda int
 ) auto_increment = 200;
 select * from dadoshistoricos;
--- Inserindo os dados na tabela dados historicos --
-insert into dadoshistoricos (dadosUmidade,dadosTemperatura,fkFazenda)values
-('70%','25ºC',500),
-('72%','23ºC',501),
-('67%','18ºC',502),
-('65%','16ºC',503),
-('75%','20ºC',504),
-('80%','23ºC',505);
 
 -- Criando Tabela Sensor, com os campos: idSensor, descricao, localSensor, fkFazenda -- 
 create table sensor (
@@ -134,9 +119,8 @@ select * from usuario join cadastro on cadastro.idCliente = usuario.fkCadastro
 	join fazenda on fazenda.fkCadastro = idCliente;
                       
 -- Exibindo os principais dados de um determinado cliente --                      
-select usuario.nomeUsuario as 'Nome do Usuário',
-       usuario.cidade as 'Cidade',
-       cadastro.nomeEmpresa as 'Nome da Empresa',
+select usuario.nome as 'Nome do Usuário',
+       cadastro.nome as 'Nome da Empresa',
        fazenda.tipoTomate as 'Tipo de Tomate',
        sensor.descricao as 'Descrição do Sensor',
        sensor.statusSensor as 'Status',
@@ -148,13 +132,29 @@ select usuario.nomeUsuario as 'Nome do Usuário',
                      join sensor on fazenda.idFazenda =  sensor.fkFazenda
                      where usuario.idUsuario = 3;
                      
--- Exibindo                                  
-select usuario.nomeUsuario as 'Usuário',
-       cadastro.nomeEmpresa as 'Nome da Empresa', 
+-- Exibindo os dados do cliente e os sensores de temperatura e umidade DHT11 --                              
+select usuario.nome as 'Usuário',
+       cadastro.nome as 'Nome da Empresa', 
        fazenda.tipoTomate as 'Tipo de Tomate',
        sensor.descricao as 'Sensor',
 	   dadoshistoricos.dadosUmidade as 'Umidade', 
        dadoshistoricos.dadosTemperatura as 'Temperatura',
+       dadoshistoricos.dtDados as 'Data e Hora da medição'
+       from cadastro join usuario on cadastro.idCliente = usuario.fkCadastro
+			  join fazenda on cadastro.idCliente = fazenda.fkCadastro
+              join dadoshistoricos on fazenda.idFazenda = dadoshistoricos.fkFazenda
+              join sensor on fazenda.idFazenda =  sensor.fkFazenda
+              where usuario.idUsuario = 1;
+ 
+-- Exibindo os dados do cliente e todos os tipos de sensores disponíveis --
+select usuario.nome as 'Usuário',
+       cadastro.nome as 'Nome da Empresa', 
+       fazenda.tipoTomate as 'Tipo de Tomate',
+       sensor.descricao as 'Sensor',
+	   dadoshistoricos.dadosUmidade as 'Sensor de Umidade', 
+       dadoshistoricos.dadosTemperatura as 'Sensor de Temperatura',
+	   dadoshistoricos.dadosLuminosidade as 'Sensor de Luminosidade',
+	   dadoshistoricos.dadosTempLM as 'Sensor LM35 - Temperatura',
        dadoshistoricos.dtDados as 'Data e Hora da medição'
        from cadastro join usuario on cadastro.idCliente = usuario.fkCadastro
 			  join fazenda on cadastro.idCliente = fazenda.fkCadastro
