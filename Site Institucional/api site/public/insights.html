@@ -37,25 +37,25 @@
                 </button>
             </div>
 
-                    <!-- Gráfico de Linhas -->
-                    <div class="graph">
-                        <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
-                        
-                    </div>
-                    
-                    <!-- Gráfico de Barras -->
-                    <div class="graph">
-                        <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
-                    </div>
-                    
-                    <!-- Grafico Pizza/Torta -->
-                    <div class="graph">
-                        <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
-                    </div>
+            <!-- Gráfico de Linhas -->
+            <div class="graph">
+                <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
 
-            
             </div>
+
+            <!-- Gráfico de Barras -->
+            <div class="graph">
+                <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+            <!-- Grafico Pizza/Torta -->
+            <div class="graph">
+                <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
+            </div>
+
+
         </div>
+    </div>
     </div>
 </body>
 
@@ -156,7 +156,7 @@
 
     // gráfico de Pizza/Torta
     var ctxPie = document.getElementById("chartPie").getContext("2d");
-    var rotulosPie = ["Crítico 1", "Crítico 2", "Emergencial 1", "Emergencial 2", "Alerta 1", "Alerta 2", "Ideal", ];
+    var rotulosPie = ["Crítico 1", "Crítico 2", "Emergencial 1", "Emergencial 2", "Alerta 1", "Alerta 2", "Ideal",];
     var dataPie = [150, 15, 153, 60, 17, 30, 50];
     var configPie = {
         type: 'pie',
@@ -176,13 +176,13 @@
                         '#4fb336',
                     ],
                     borderColor: [
-                    '#fffff',
-                    '#fffff',
-                    '#fffff',
-                    '#fffff',
-                    '#fffff',
-                    '#fffff',
-                    '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
 
                         '#250066',
                         '#e00f00',
