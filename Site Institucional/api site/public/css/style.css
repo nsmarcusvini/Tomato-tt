@@ -286,35 +286,35 @@
     margin-top: 30px;
     
 }
-
-.perigo-frio {
+.emergencia-frio{
     background-color: #1c548c;
-    border-radius: 100%;
+}
+.emergencia-quente{
+    background-color: #f08000;
+}
+.perigo-frio {
+    background-color: #250066;
 }
 
 .perigo-quente {
-    border-radius: 100%;
     background-color: #e00f00;
 }
 
 .alerta-frio {
-    border-radius: 100%;
     background-color: #42A5F5;
 }
 
 .alerta-quente {
-    border-radius: 100%;
     background-color: #fff645;
 }
 
 .ideal {
-    border-radius: 100%;
     background-color: #4fb336;
 }
 
 .item-regua {
-    padding: 10px;
-    width: 15%;
+    padding: 20px;
+    width: 7%;
     margin: 5px;
     text-align: center;
 }
@@ -335,6 +335,12 @@ section{
     margin-top: 15px;
 }
 
+.graphs h1{
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
 .lateral{
     justify-content: center;
     align-items: center;
@@ -350,6 +356,35 @@ section{
     color: white;
 }
 
+.lateral img{
+    height: 60px;
+}
+
+.lateral h4{
+    color: #c9c9c9;
+
+}
+
+#hello{
+    text-align: center;
+}
+#hello span{
+    color: #c9c9c9;
+}
+.alerts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.alerts span{
+    color: #e00f00;
+}
+
+
+#umi{
+    color: #34baeb;
+}
 /* Início MENU HAMBURGUER */
 .nav ul a{
     text-decoration: none;
@@ -416,4 +451,90 @@ input[type="checkbox"]:checked ~ div{
     margin-bottom: 20px;
     height: 50px;
 }
+.nav li img{
+    height: 25px;
+}
 /* Fim MENU HAMBURGUER */
+
+.logout{
+    background-color: #3d3c3c;
+    border-radius: 100px;
+    width: 180px;
+    margin-top: 500px;
+    padding: 10px;
+    border: 0.5px solid #949494;
+
+}
+
+/* RELATORIOS */
+
+.dash-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .graph {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #eaeaea;
+    width: 45%;
+    height: 35vh;
+    margin: 10px;
+    padding: 5px;
+  }
+  
+  .header {
+    background-color: #232323;
+    height: 70px;
+    border-bottom: 3px solid #2196f3;
+    margin-bottom: 15px;
+  }
+  
+  .container {
+    width: 90%;
+    height: 100%;
+    margin: auto;
+  }
+  
+  .header .container .highlight {
+    color: #2196f3;
+  }
+  
+  .header h1 {
+    float: left;
+    margin-top: 20px;
+    color: white;
+    font-size: 25px;
+  }
+  
+  .box {
+      color: #fff;
+      width: 28%;
+      height: 80%;
+  }
+  
+  .box h1 {
+    font-size: 45px;
+    margin: 40px 10px 0px 10px;
+    border-bottom: solid #00000012 3px;
+    font-weight: lighter;
+  }
+  .box h3 {
+    margin-bottom: 5px;
+    margin-top: 15px;
+  }
+  
+  .yellow {
+    background-color: #e2cb00;
+  }
+  
+  .green {
+    background-color: #4caf50;
+  }
+  .red {
+    background-color: #f44336;
+  }

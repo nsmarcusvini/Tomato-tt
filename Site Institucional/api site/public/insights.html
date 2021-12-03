@@ -1,13 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tomato π</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    
+    <div class="container-janela">
+
+        <div class="janela">
+
+            <input type="checkbox" id="check">
+            <!-- O for é responsável por ligar o input ao label, tipo checkbox é uma caixa clicável, e ligado ao input, ao clicar na imagem ela ativa o checkbox -->
+            <label for="check">
+                <img src="assets/img/hamburguer.png" alt="">
+            </label>
+            <div class="nav">
+                <div>
+                    <img src="./assets/img/logo final branco.png">
+                </div>
+                <div>
+                    <ul>
+                        <li><a href="../public/dashboard.html">Gráficos</a></li>
+                        <li><a href="../public/insights.html">Relatórios</a></li>
+                        <li><a href="../public/index.html">Início</a></li>
+                        <li><a href="../public/simulador financeiro.html">Simulador Financeiro</a></li>
+                    </ul>
+                </div>
+                <button class="logout" onclick="sair()">
+                    <h3>Sair</h3>
+                </button>
+            </div>
+
+                    <!-- Gráfico de Linhas -->
+                    <div class="graph">
+                        <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
+                        
+                    </div>
+                    
+                    <!-- Gráfico de Barras -->
+                    <div class="graph">
+                        <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+                    
+                    <!-- Grafico Pizza/Torta -->
+                    <div class="graph">
+                        <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+
+            
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
+<script>
+    // gráfico de Linha
+    var ctxLine = document.getElementById("chartLine").getContext("2d");
+    var rotulosLine = ["07:00", "10:00", "13:00", "16:00", "19:00", "22:00"];
+    var dataLine = [21, 23, 27, 19, 20, 19];
+    var configLine = {
+        type: 'line',
+        data: {
+            labels: rotulosLine, // referenciando a variável de rótulos (labels) para o gráfico de linha
+            datasets: [
+                {
+                    label: 'Temperatura Diária',
+                    data: dataLine, // referenciando a variável de dados para o gráfico de linha
+                    backgroundColor: [
+                        '#FF000022',
+                        '#FFFF0022',
+                        '#FF00FF22',
+                        '#00FFFF22',
+                        '#99009922',
+                        '#99990022',
+                        '#F0F00022',
+                        '#65002222',
+                    ],
+                    borderColor: [
+                        '#FF0000',
+                        '#FFFF00',
+                        '#FF00FF',
+                        '#00FFFF',
+                        '#990099',
+                        '#999900',
+                        '#F0F000',
+                        '#650022',
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            // por padrão, vem como 'true', e faz com que o gráfico se 'mantenha com o mesmo aspecto de proporção', não ficando responsivo 
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    }
+    var ax_chartLine = new Chart(ctxLine, configLine); // criando o gráfico, chamando o new Chart da biblioteca, passando o contexto e as configurações
+
+
+    // gráfico de Barras
+    var ctxBar = document.getElementById("chartBar").getContext("2d");
+    var rotulosBar = ["Crítico", "Emergencial", "Alerta", "Ideal"];
+    var dataBar = [10, 70, 50, 5];
+    var configBar = {
+        type: 'bar',
+        data: {
+            labels: rotulosBar, // referenciando a variável de rótulos (labels) para o gráfico de barras
+            datasets: [
+                {
+                    label: '',
+                    data: dataBar, // referenciando a variável de dados para o gráfico de barras
+                    backgroundColor: [
+                        '#e00f00',
+                        '#1c548c',
+                        '#fff645',
+                        '#4fb336',
+                    ],
+                    borderColor: [
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#fffff',
+                        '#1c548c',
+                        '#fff645',
+                        '#4fb336',
+                    ],
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            // por padrão, vem como 'true', e faz com que o gráfico se 'mantenha com o mesmo aspecto de proporção', não ficando responsivo
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    }
+    var ax_chartBar = new Chart(ctxBar, configBar); // criando o gráfico, chamando o new Chart da biblioteca, passando o contexto e as configurações
+
+
+    // gráfico de Pizza/Torta
+    var ctxPie = document.getElementById("chartPie").getContext("2d");
+    var rotulosPie = ["Crítico 1", "Crítico 2", "Emergencial 1", "Emergencial 2", "Alerta 1", "Alerta 2", "Ideal", ];
+    var dataPie = [150, 15, 153, 60, 17, 30, 50];
+    var configPie = {
+        type: 'pie',
+        data: {
+            labels: rotulosPie, // referenciando a variável de rótulos (labels) para o gráfico de pizza/torta
+            datasets: [
+                {
+                    label: 'Visão mensal',
+                    data: dataPie, // referenciando a variável de dados para o gráfico de pizza/torta
+                    backgroundColor: [
+                        '#250066',
+                        '#e00f00',
+                        '#1c548c',
+                        '#f08000',
+                        '#42A5F5',
+                        '#fff645',
+                        '#4fb336',
+                    ],
+                    borderColor: [
+                    '#fffff',
+                    '#fffff',
+                    '#fffff',
+                    '#fffff',
+                    '#fffff',
+                    '#fffff',
+                    '#fffff',
+
+                        '#250066',
+                        '#e00f00',
+                        '#1c548c',
+                        '#f08000',
+                        '#42A5F5',
+                        '#fff645',
+                        '#4fb336',
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            // por padrão, vem como 'true', e faz com que o gráfico se 'mantenha com o mesmo aspecto de proporção', não ficando responsivo
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    }
+    var ax_chartPie = new Chart(ctxPie, configPie); // criando o gráfico, chamando o new Chart da biblioteca, passando o contexto e as configurações
+
+</script>
