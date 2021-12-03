@@ -433,8 +433,12 @@
 
                     // NÃO TEM UMIDADE IDEAL
 
-                    // motivo desse if ??
-                    if (umi_total[umi_total.length - 1] >= 10.8 && umi_total[umi_total.length - 1] <= 11.2) {
+                    // mensagem nao revisada
+                    if (umi_total[umi_total.length - 1] >= 49 && umi_total[umi_total.length - 1] <= 51) {
+						 msg_atencao2.innerHTML = (`<h3 style="color: #4fb336;">Ideal</h3>
+                        <img src="assets/img/ideal.png" alt="Ideal">`);
+                        document.getElementById('chart2').style.backgroundColor = '#4fb33650';
+                        document.getElementById('chart2').style.borderColor = '#4fb336';
                     }
 
                 }
