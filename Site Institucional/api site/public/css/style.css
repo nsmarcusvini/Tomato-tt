@@ -11,7 +11,7 @@
     background-color: black;
 }
 .container{
-    width: 90%;
+    width: 80%;
     height: 100%;
     margin: auto;
 }
@@ -244,18 +244,26 @@
     margin-bottom: 100px;
 
 }
-#footer{
+    #footer{
+    padding-top: 15px;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    margin: auto;
     background-color: black;
     color: #c9c9c9;
     display: flex;
-    padding-top: 15px;
-    flex-direction: column;
-    align-items: center;
     bottom: 0;
     left: 0;
     height: 85px;
-    position: relative;
     width: 100%;
+    font-size: 11px;
+}
+
+#footer img{
+    height: 50px;
+    margin-left: 200px;
+    margin-right: 600px;
 }
 
 /* DASHBOARD */
