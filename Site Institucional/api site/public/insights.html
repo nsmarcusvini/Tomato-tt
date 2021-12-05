@@ -13,7 +13,7 @@
 <body id="fundo">
     <div class="janela">
         
-        <div class="container">
+        <div class="container-janela">
 
             <input type="checkbox" id="check">
             <!-- O for é responsável por ligar o input ao label, tipo checkbox é uma caixa clicável, e ligado ao input, ao clicar na imagem ela ativa o checkbox -->
@@ -37,28 +37,31 @@
                 </button>
             </div>
 
-            <div class="graphs">
-                <h1>Relatórios</h1>
+            <div class="container">
+                    <div class="graphs">
 
-                <h2>Diário</h2>
-                <!-- Gráfico de Linhas -->
-                <div class="graph">
-                    <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
+                    <h1>Relatórios</h1>
+                    
+                    <h2>Diário</h2>
+                    <!-- Gráfico de Linhas -->
+                    <div class="graph">
+                        <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+                    
+                    
+                    <h2>Semanal</h2>
+                    <!-- Gráfico de Barras -->
+                    <div class="graph">
+                        <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
+                    </div>
+                    
+                    <h2>Mensal</h2>
+                    <!-- Grafico Pizza/Torta -->
+                    <div class="graph">
+                        <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
+                    </div>
                     
                 </div>
-                
-                <h2>Semanal</h2>
-                <!-- Gráfico de Barras -->
-                <div class="graph">
-                    <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
-                </div>
-                
-                <h2>Mensal</h2>
-                <!-- Grafico Pizza/Torta -->
-                <div class="graph">
-                    <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
-                </div>
-                
             </div>
 
         </div>
