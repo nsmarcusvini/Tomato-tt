@@ -10,10 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
-    <div class="container-janela">
-
-        <div class="janela">
+<body id="fundo">
+    <div class="janela">
+        
+        <div class="container">
 
             <input type="checkbox" id="check">
             <!-- O for é responsável por ligar o input ao label, tipo checkbox é uma caixa clicável, e ligado ao input, ao clicar na imagem ela ativa o checkbox -->
@@ -36,23 +36,25 @@
                     <h3>Sair</h3>
                 </button>
             </div>
+            <div class="graphs">
 
-            <!-- Gráfico de Linhas -->
-            <div class="graph">
-                <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
-
+                <!-- Gráfico de Linhas -->
+                <div class="graph">
+                    <canvas id="chartLine" style="width: 100%; height: 100%;"></canvas>
+                    
+                </div>
+                
+                <!-- Gráfico de Barras -->
+                <div class="graph">
+                    <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
+                </div>
+                
+                <!-- Grafico Pizza/Torta -->
+                <div class="graph">
+                    <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
+                </div>
+                
             </div>
-
-            <!-- Gráfico de Barras -->
-            <div class="graph">
-                <canvas id="chartBar" style="width: 100%; height: 100%;"></canvas>
-            </div>
-
-            <!-- Grafico Pizza/Torta -->
-            <div class="graph">
-                <canvas id="chartPie" style="width: 100%; height: 100%;"></canvas>
-            </div>
-
 
         </div>
     </div>
