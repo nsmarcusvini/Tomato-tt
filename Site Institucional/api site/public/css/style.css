@@ -196,8 +196,13 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
+    justify-content: center;
+    align-items: center;
 }
-#proposito h2{
+#proposito img{
+    height: 150px;
+}
+#proposito .espacamento_div h2{
     text-align: center;
     background-color: #242629;
     padding: 5px;
@@ -206,6 +211,11 @@
     font-weight: lighter;
     border-radius: 5px;
     margin-top: 35px;
+    width: 332px;
+}
+#proposito p{
+    height: 100px;
+    width: 300px;
 }
 #proposito p{
     background-color: whitesmoke;
@@ -215,6 +225,10 @@
 }
 .espacamento_div{
     margin: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 .conteudo-img{
     display: flex;
@@ -258,17 +272,28 @@
     padding: 30px;
     color: white;
 }
+#monitoramento a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
 #titulo{
     display: flex;
     align-items: center;
     justify-content: center;
     background: #0d0d0d;
-    padding: 20px;
+    padding: 50px 20px 20px 20px;
+}
+#titulo2{
+    text-align: center;
+    margin-top: 50px;
 }
 #titulo h1{
     text-align: center;
-    background-color: #a61107;
-    border-radius: 20px;
+    background-color: #3d3c3c;
+    border-radius: 30px;
+    border-top: 1px solid #949494;
+    border-right: 1px solid #949494;
     box-shadow: 5px 5px 0.03px black;
     color: white;
     padding: 20px;
