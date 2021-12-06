@@ -196,7 +196,6 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 50px;
-    margin-top: 70px;
 }
 #proposito h2{
     text-align: center;
@@ -217,30 +216,54 @@
 .espacamento_div{
     margin: 20px;
 }
+.conteudo-img{
+    display: flex;
+    background-color: #0d0d0d;
+    padding: 20px 0px 50px 0px;
+}
+.conteudo-img2{
+    display: flex;
+    background-color: #1f1f1f;
+}
 #services{
+    width: 60%;
+    height: 100%;
+}
+#services-2{
+    width: 60%;
+    height: 100%;
+}
+#services-2 img{
+    width: 100%;
+    height: 100%;
+}
+#services img{
+    width: 100%;
+    height: 100%;
+}
+#services2{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 40%;
 }
+
 #irrigacao h1{
     text-align: center;
     color: #1e6ce8;
 }
 #monitoramento{
     width: 70%;
-    background-color: whitesmoke;
-    padding: 50px;
-    padding-top: 40px;
-    border-radius: 20px;
-    border: solid black 4px;
-    box-shadow: 5px 5px 0.03px black;
+    padding: 30px;
+    color: white;
 }
 #titulo{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
+    background: #0d0d0d;
+    padding: 20px;
 }
 #titulo h1{
     text-align: center;
@@ -252,15 +275,9 @@
 }
 #irrigacao{
     width: 70%;
-    margin-top: 40px;
-    background-color: whitesmoke;
-    padding: 50px;
+    padding: 30px;
+    color: white;
     padding-top: 40px;
-    border-radius: 20px;
-    border: solid black 4px;
-    box-shadow: 5px 5px 0.03px black;
-    margin-bottom: 100px;
-
 }
     #footer{
     padding-top: 15px;
